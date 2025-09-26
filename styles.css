@@ -286,6 +286,14 @@ h1, h2, h3, h4, h5, h6 {
     gap: 1.5rem;
 }
 
+.large-picture--container {
+    border: transparent;
+    border-radius: var(--border-radius);
+    box-shadow: 0 0 0.2rem var(--color-shadows);
+    padding: 1.5rem;
+    gap: 2rem;
+}
+
 .double-picture--container {
     display: flex;
     flex-direction: row;
@@ -302,6 +310,11 @@ h1, h2, h3, h4, h5, h6 {
 
 .picture--img {
     width: clamp(11rem, 15vw, 15rem);
+    height: auto;
+}
+
+.wide-picture--img {
+    width: clamp(25rem, 40vw, 60rem);
     height: auto;
 }
 
@@ -410,7 +423,6 @@ h1, h2, h3, h4, h5, h6 {
     .picture--description {
         padding-left: 0;
     }
-
 
     .kimmeric {
     
