@@ -704,4 +704,59 @@ h1, h2, h3 {
         max-width: 15rem;
     }
 
+    .mitridat {
+        display: grid;
+        grid-template-areas:
+        "mitridat__title mitridat__title mitridat__title"
+        "mitridat__text mitridat__text mitridat__picture-container"
+        "mitridat__text mitridat__text ."
+        "mitridat__map-container mitridat__map-container mitridat__map-container"
+        "mitridat__picture-container-left mitridat__text-2 mitridat__text-2"
+        ". mitridat__text-2 mitridat__text-2"
+        "mitridat__map-container-2 mitridat__map-container-2 mitridat__map-container-2"
+        "mitridat__text-3 mitridat__text-3 mitridat__picture-container-2"
+        "mitridat__text-3 mitridat__text-3 ."
+        "mitridat__map-container-3 mitridat__map-container-3 mitridat__map-container-3";         
+    }
+
+    .mitridat__title {
+        grid-area: mitridat__title;
+    }
+
+    .mitridat__text {
+        grid-area: mitridat__text;
+    }
+
+    .mitridat__picture-container {
+        grid-area: mitridat__picture-container;
+    }
+
+    .mitridat__map-container {
+        grid-area: mitridat__map-container;
+    }
+
+    .mitridat__picture-container-left {
+        grid-area: mitridat__picture-container-left;
+    }
+
+    .mitridat__text-2 {
+        grid-area: mitridat__text-2;
+    }
+
+    .mitridat__map-container-2 {
+        grid-area: mitridat__map-container-2;
+    }
+
+    .mitridat__text-3 {
+        grid-area: mitridat__text-3;
+    }
+
+    .mitridat__picture-container-2 {
+        grid-area: mitridat__picture-container-2;
+    }
+
+    .mitridat__map-container-3 {
+        grid-area: mitridat__map-container-3;
+    }
+
 }
