@@ -56,6 +56,7 @@ a, button, input, textarea, svg * {
 
 a {
     color: var(--color-link);
+    text-decoration: none;
 }
 
 a:hover {
@@ -343,6 +344,10 @@ h1, h2, h3 {
     height: auto;
 }
 
+.text--narrow {
+    max-width: 50rem;
+}
+
 .kimmeric__title::before {
     content: url(./Icons/icon-Apollo-text.svg);
     margin-right: var(--container-padding-x);
@@ -352,6 +357,13 @@ h1, h2, h3 {
 
 .spartok__title::before {
     content: url(./Icons/icon-Spartokids-text.svg);
+    margin-right: var(--container-padding-x);
+    height: 4rem;
+    aspect-ratio: 1;
+}
+
+.mitridat__title::before {
+    content: url(./Icons/icon-Mitridat-text.svg);
     margin-right: var(--container-padding-x);
     height: 4rem;
     aspect-ratio: 1;
