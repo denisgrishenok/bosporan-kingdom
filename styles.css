@@ -352,7 +352,8 @@ h1, h2, h3 {
 .spartok__title::before,
 .mitridat__title::before,
 .tibery__title::before,
-.late__title::before {
+.late__title::before,
+.literature__title::before {
     margin-right: var(--container-padding-x);
     height: 4rem;
     aspect-ratio: 1;
@@ -376,6 +377,10 @@ h1, h2, h3 {
 
 .late__title::before {
     content: url(./Icons/icon-Late-Rome-text.svg);
+}
+
+.literature__title::before {
+    content: url(./Icons/icon-literature-text.svg);
 }
 
 @media (min-width: 450px) {
