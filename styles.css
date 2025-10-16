@@ -348,32 +348,34 @@ h1, h2, h3 {
     max-width: 50rem;
 }
 
-.kimmeric__title::before {
-    content: url(./Icons/icon-Apollo-text.svg);
+.kimmeric__title::before,
+.spartok__title::before,
+.mitridat__title::before,
+.tibery__title::before,
+.late__title::before {
     margin-right: var(--container-padding-x);
     height: 4rem;
     aspect-ratio: 1;
+}
+
+.kimmeric__title::before {
+    content: url(./Icons/icon-Apollo-text.svg);
 }
 
 .spartok__title::before {
     content: url(./Icons/icon-Spartokids-text.svg);
-    margin-right: var(--container-padding-x);
-    height: 4rem;
-    aspect-ratio: 1;
 }
 
 .mitridat__title::before {
     content: url(./Icons/icon-Mitridat-text.svg);
-    margin-right: var(--container-padding-x);
-    height: 4rem;
-    aspect-ratio: 1;
 }
 
 .tibery__title::before {
     content: url(./Icons/icon-Tiberiy-text.svg);
-    margin-right: var(--container-padding-x);
-    height: 4rem;
-    aspect-ratio: 1;
+}
+
+.late__title::before {
+    content: url(./Icons/icon-Late-Rome-text.svg);
 }
 
 @media (min-width: 450px) {
@@ -786,7 +788,7 @@ h1, h2, h3 {
         "tibery__text-5 tibery__text-5 ."
         "tibery__map-container-4 tibery__map-container-4 tibery__map-container-4"
         "tibery__text-6 tibery__text-6 tibery__text-6"
-        "tibery__wide-picture-container-2 tibery__wide-picture-container-2 tibery__wide-picture-container-2"
+        "tibery__wide-picture-container-2 tibery__wide-picture-container-2 tibery__wide-picture-container-2";
     }
 
     .tibery__title {
@@ -859,5 +861,50 @@ h1, h2, h3 {
 
     .tibery__wide-picture-container-2 {
         grid-area: tibery__wide-picture-container-2;
+    }
+
+    .late {
+        display: grid;
+        grid-template-areas:
+        "late__title late__title late__title"
+        "late__text late__text late__picture-container"
+        "late__text late__text ."
+        "late__map-container late__map-container late__map-container"
+        "late__picture-container-left late__text-2 late__text-2"
+        ". late__text-2 late__text-2"
+        "late__text-3 late__text-3 late__picture-container-2"
+        "late__text-3 late__text-3 .";
+    }
+
+    .late__title {
+        grid-area: late__title;
+    }
+
+    .late__text {
+        grid-area: late__text;
+    }
+
+    .late__picture-container {
+        grid-area: late__picture-container;
+    }
+
+    .late__map-container {
+        grid-area: late__map-container;
+    }
+
+    .late__picture-container-left {
+        grid-area: late__picture-container-left;
+    }
+
+    .late__text-2 {
+        grid-area: late__text-2;
+    }
+
+    .late__text-3 {
+        grid-area: late__text-3;
+    }
+
+    .late__picture-container-2 {
+        grid-area: late__picture-container-2;
     }
 }
