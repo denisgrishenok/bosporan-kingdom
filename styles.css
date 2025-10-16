@@ -369,6 +369,13 @@ h1, h2, h3 {
     aspect-ratio: 1;
 }
 
+.tibery__title::before {
+    content: url(./Icons/icon-Tiberiy-text.svg);
+    margin-right: var(--container-padding-x);
+    height: 4rem;
+    aspect-ratio: 1;
+}
+
 @media (min-width: 450px) {
     
     .header__button-burger {
@@ -759,4 +766,98 @@ h1, h2, h3 {
         grid-area: mitridat__map-container-3;
     }
 
+    .tibery {
+        display: grid;
+        grid-template-areas:
+        "tibery__title tibery__title tibery__title"
+        "tibery__text tibery__text tibery__picture-container"
+        "tibery__text tibery__text ."
+        "tibery__map-container tibery__map-container tibery__map-container"
+        "tibery__picture-container-left tibery__text-2 tibery__text-2"
+        ". tibery__text-2 tibery__text-2"
+        "tibery__wide-picture-container tibery__wide-picture-container tibery__wide-picture-container"
+        "tibery__text-3 tibery__text-3 tibery__picture-container-2"
+        "tibery__text-3 tibery__text-3 ." 
+        "tibery__map-container-2 tibery__map-container-2 tibery__map-container-2"
+        "tibery__picture-container-left-2 tibery__text-4 tibery__text-4"
+        ". tibery__text-4 tibery__text-4"
+        "tibery__map-container-3 tibery__map-container-3 tibery__map-container-3"
+        "tibery__text-5 tibery__text-5 tibery__picture-container-3"
+        "tibery__text-5 tibery__text-5 ."
+        "tibery__map-container-4 tibery__map-container-4 tibery__map-container-4"
+        "tibery__text-6 tibery__text-6 tibery__text-6"
+        "tibery__wide-picture-container-2 tibery__wide-picture-container-2 tibery__wide-picture-container-2"
+    }
+
+    .tibery__title {
+        grid-area: tibery__title;
+    }
+
+    .tibery__text {
+        grid-area: tibery__text;
+    }
+
+    .tibery__picture-container {
+        grid-area: tibery__picture-container;
+    }
+
+    .tibery__map-container {
+        grid-area: tibery__map-container;
+    }
+
+    .tibery__picture-container-left {
+        grid-area: tibery__picture-container-left;
+    }
+
+    .tibery__text-2 {
+        grid-area: tibery__text-2;
+    }
+
+    .tibery__wide-picture-container {
+        grid-area: tibery__wide-picture-container;
+    }
+
+    .tibery__text-3 {
+        grid-area: tibery__text-3;
+    }
+
+    .tibery__picture-container-2 {
+        grid-area: tibery__picture-container-2;
+    }
+
+    .tibery__map-container-2 {
+        grid-area: tibery__map-container-2;
+    }
+
+    .tibery__picture-container-left-2 {
+        grid-area: tibery__picture-container-left-2;
+    }
+
+    .tibery__text-4 {
+        grid-area: tibery__text-4;
+    }
+
+    .tibery__map-container-3 {
+        grid-area: tibery__map-container-3;
+    }
+
+    .tibery__text-5 {
+        grid-area: tibery__text-5;
+    }
+
+    .tibery__picture-container-3 {
+        grid-area: tibery__picture-container-3;
+    }
+
+    .tibery__map-container-4 {
+        grid-area: tibery__map-container-4;
+    }
+
+    .tibery__text-6 {
+        grid-area: tibery__text-6;
+    }
+
+    .tibery__wide-picture-container-2 {
+        grid-area: tibery__wide-picture-container-2;
+    }
 }
