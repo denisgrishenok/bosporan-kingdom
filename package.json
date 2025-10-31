@@ -1,0 +1,30 @@
+{
+  "name": "bospor",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/denisgrishenok/bosporan-kingdom.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/denisgrishenok/bosporan-kingdom/issues"
+  },
+  "homepage": "https://github.com/denisgrishenok/bosporan-kingdom#readme",
+  "devDependencies": {
+    "@eslint/css": "^0.14.0",
+    "@eslint/js": "^9.38.0",
+    "@eslint/json": "^0.13.2",
+    "@eslint/markdown": "^7.5.0",
+    "eslint": "^9.38.0",
+    "globals": "^16.4.0"
+  }
+}
