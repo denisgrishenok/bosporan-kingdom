@@ -565,19 +565,19 @@ h4 {
     }
 
     .bliz-2 {
-        grid-template-areas: large-picture-2;
+        grid-area: large-picture-2;
     }
 
     .bliz-3 {
-        grid-template-areas: large-picture-3;
+        grid-area: large-picture-3;
     }
 
     .bliz-4 {
-        grid-template-areas: large-picture-4;
+        grid-area: large-picture-4;
     }
 
     .bliz-description {
-        grid-template-areas: large-picture-description;
+        grid-area: large-picture-description;
     }
 
     .vasy-1 {
@@ -585,19 +585,19 @@ h4 {
     }
 
     .vasy-2 {
-        grid-template-areas: large-picture-2;
+        grid-area: large-picture-2;
     }
 
     .vasy-3 {
-        grid-template-areas: large-picture-3;
+        grid-area: large-picture-3;
     }
 
     .vasy-4 {
-        grid-template-areas: large-picture-4;
+        grid-area: large-picture-4;
     }
 
     .vasy-description {
-        grid-template-areas: large-picture-description;
+        grid-area: large-picture-description;
     }
 
     .kul-oba-description,
