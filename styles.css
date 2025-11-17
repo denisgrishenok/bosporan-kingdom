@@ -20,8 +20,8 @@ html {
 :root {
     --color-text: #4C1E00;
     --color-light: #ffffff;
-    --color-link: #467687;
-    --color-link-hover: #798A8D;
+    --color-link: #798A8D;
+    --color-link-hover: #467687;
     --color-footer: #595959;
     --color-shadows: #9AA2A3;
 
@@ -188,6 +188,7 @@ h4 {
     background-color: transparent;
     border-radius: var(--border-radius);
     border: var(--border);
+    cursor: pointer;
 }
 
 .header__button:hover {
@@ -197,7 +198,7 @@ h4 {
 .header__button-content {
     font-family: var(--font-family-support);
     font-weight: 400;
-    font-size: 0.875rem;
+    font-size: 1rem;
     text-transform: none;
     letter-spacing: 0.3rem;
     padding-inline: calc(var(--container-padding-x) / 2);
@@ -442,7 +443,7 @@ h4 {
     font-size: clamp(0.9rem, 2vw, 1.4rem);
 }
 
-@media (min-width: 390px) {
+@media (min-width: 350px) {
     
     .header__button-burger {
         display: none;
