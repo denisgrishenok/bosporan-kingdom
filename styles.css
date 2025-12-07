@@ -25,6 +25,7 @@ html {
     --color-footer: #595959;
     --color-shadows: #9AA2A3;
 
+
     --border: 0.06rem solid var(--color-link);
     --border-hover: 0.06rem solid var(--color-link-hover);
     --border-radius: 1.8rem;
@@ -175,9 +176,18 @@ h4 {
     padding: 0;
 }
 
+.header__button-svg:hover .header__button-icon-svg path {
+    stroke: var(--color-link-hover);
+}
+
 .header__button-icon-svg {
     height: calc(var(--header-height) / 2);
     width: auto;
+}
+
+.header__button-icon-svg path {
+    stroke: var(--color-link);
+    stroke-width: 0.08rem;
 }
 
 .header__button {
@@ -241,12 +251,29 @@ h4 {
     margin-top: 0;
 }
 
+/* .intro {
+    height: 100dvh;
+} */
+
 .intro__nav-item {
     display: grid;
     grid-template-columns: repeat(1, 1fr);
     border: transparent;
     border-radius: var(--border-radius);
     box-shadow: 0 0 0.2rem var(--color-shadows);
+}
+
+.intro__nav-item:hover {
+    cursor: pointer;
+    box-shadow: 0 0 0.2rem var(--color-link-hover);
+}
+
+.intro__nav-item:hover .intro__nav-icon-svg path {
+    stroke: var(--color-link-hover);
+}
+
+.intro__nav-item:hover .intro__nav-link p {
+    color: var(--color-link-hover);
 }
 
 .intro__nav-item:not(:last-child) {
@@ -270,6 +297,11 @@ h4 {
     height: 3rem;
     width: auto;
     margin-bottom: -0.4rem;
+}
+
+.intro__nav-icon-svg path {
+    stroke: var(--color-link);
+    stroke-width: 0.08rem;
 }
 
 .section--container {
@@ -436,6 +468,16 @@ h4 {
 .footer__icon-list {
     display: flex;
     gap: 2rem;
+}
+
+.footer-icon-svg path {
+    stroke: var(--color-light);
+    stroke-width: 0.08rem;
+}
+
+
+.icon-list-item:hover .footer-icon-svg path {
+    stroke: var(--color-link-hover);
 }
 
 .footer__link {
