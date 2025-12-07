@@ -331,6 +331,14 @@ h4 {
     gap: 1.5rem;
 }
 
+.picture--container-inner:hover {
+    box-shadow: 0 0 0.2rem var(--color-link-hover);
+}
+
+.picture--container-inner picture:hover {
+    cursor: pointer;
+}
+
 .large-picture--container {
     display: flex;
     flex-direction: column;
@@ -340,6 +348,14 @@ h4 {
     box-shadow: 0 0 0.2rem var(--color-shadows);
     padding: 1.5rem;
     gap: 1.5rem;
+}
+
+.large-picture--container:hover {
+    box-shadow: 0 0 0.2rem var(--color-link-hover);
+}
+
+.large-picture--container picture:hover {
+    cursor: pointer;
 }
 
 .double-picture--container {
@@ -384,6 +400,11 @@ h4 {
     box-shadow: 0 0 0.2rem var(--color-shadows);
     padding: var(--container-padding-x);
     margin-bottom: 2rem;
+}
+
+.map--container:hover {
+    box-shadow: 0 0 0.2rem var(--color-link-hover);
+    cursor: pointer;
 }
 
 .map--img {
