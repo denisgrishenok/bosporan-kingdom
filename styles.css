@@ -329,6 +329,10 @@ h4 {
     margin-bottom: -0.4rem;
 }
 
+.appendix__svg {
+    height: 3.5rem;
+}
+
 .intro__nav-icon-svg path {
     stroke: var(--color-link);
     stroke-width: 0.08rem;
@@ -478,7 +482,7 @@ h4 {
 }
 
 .literature__title::before {
-    content: url(./Icons/icon-literature-text.svg);
+    content: url(./Icons/icon-appendix-text.svg);
 }
 
 .footer {
@@ -728,8 +732,8 @@ h4 {
         grid-area: intro__picture-container;
     } */
 
-     .intro__text,
-     .intro__nav {
+    .intro__text,
+    .intro__nav {
         max-width: 70%;
     }
     
@@ -800,7 +804,7 @@ h4 {
         "spartok__text-3 spartok__text-3 spartok__picture-container-2"
         "spartok__text-3 spartok__text-3 ."
         "spartok__large-picture-container spartok__large-picture-container spartok__large-picture-container"
-        "spartok__text-4 spartok__text-4 spartok__text-4"
+        "spartok__text-4 spartok__text-4 spartok__picture-container-2-1"
         "spartok__large-picture-container-2 spartok__large-picture-container-2 spartok__large-picture-container-2"
         "spartok__picture-container-left-2 spartok__text-5 spartok__text-5"
         ". spartok__text-5 spartok__text-5"
@@ -859,6 +863,10 @@ h4 {
 
     .spartok__text-4 {
         grid-area: spartok__text-4;
+    }
+
+    .spartok__picture-container-2-1 {
+        grid-area: spartok__picture-container-2-1;
     }
 
     .spartok__large-picture-container-2 {
