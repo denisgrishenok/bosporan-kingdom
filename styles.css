@@ -22,7 +22,6 @@ html {
     --color-light: #ffffff;
     --color-link: #798A8D;
     --color-link-hover: #595959;
-    /* --color-link-hover: #467687; */
     --color-footer: #595959;
     --color-shadows: #9AA2A3;
 
@@ -90,7 +89,7 @@ h4 {
 }
 
 .title--h1 {
-    font-size: clamp(1.3rem, 2vw, 2rem);
+    font-size: clamp(1.5rem, 2vw, 2.5rem);
     margin-top: 2rem;
     margin-bottom: 0.5rem;
 }
@@ -121,6 +120,7 @@ h4 {
     height: var(--header-height);
     padding-inline: var(--container-padding-x);
     box-shadow: 0 0 0.5rem var(--color-shadows);
+    
 }
 
 .header__container {
@@ -254,8 +254,10 @@ h4 {
     margin-inline: calc(50% - 50vw);
     min-height: calc(100vh - var(--header-height));
     min-height: calc(100dvh - var(--header-height));
-    background-color: #cfa76b;
-    background-image: url(./Images/intro-bg-light.png);
+    background-image: image-set(
+        url("./Images/intro-bg.avif.avif") type("image/avif"),
+        url("./Images/intro-bg.webp.webp") type("image/webp")
+    );
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -269,16 +271,6 @@ h4 {
     flex-direction: column;
     max-width: var(--container-width);
     padding-inline: var(--container-padding-x);
-}
-
-.intro__text {
-    color: var(--color-text);
-    
-}
-
-.intro__title {
-    font-size: clamp(1rem, 2vw, 1rem);
-    margin-top: 0;
 }
 
 .intro__nav-item {
