@@ -114,13 +114,16 @@ h4 {
 }
 
 .header {
+    position: relative;
+    top: 0;
+    z-index: 10;
+    background: var(--color-light);
     display: flex;
     align-items: center;
     justify-content: center;
     height: var(--header-height);
     padding-inline: var(--container-padding-x);
-    box-shadow: 0 0 0.5rem var(--color-shadows);
-    
+    box-shadow: 0 0 1.5rem var(--color-shadows);       
 }
 
 .header__container {
