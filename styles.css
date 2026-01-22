@@ -450,7 +450,7 @@ h4 {
 .mitridat__title::before,
 .tibery__title::before,
 .late__title::before,
-.literature__title::before {
+.appendix__title::before {
     margin-right: var(--container-padding-x);
     height: 4rem;
     aspect-ratio: 1;
@@ -476,8 +476,83 @@ h4 {
     content: url(./Icons/icon-Late-Rome-text.svg);
 }
 
-.literature__title::before {
+.appendix__title::before {
     content: url(./Icons/icon-appendix-text.svg);
+}
+
+.appendix__rulers {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.rulers__table {
+    min-width: 1200px;
+    border-collapse: collapse;
+}
+
+.rulers__table td {
+    width: 15rem;
+    height: 1.5rem;
+}
+
+.rulers__title {
+    text-align: left;
+}
+
+.rulers__text {
+    text-align: center;
+}
+
+.arch {
+    color: darkblue;
+    border: 1px solid blue;
+}
+
+.spart {
+    color: darkorange;
+    border: 1px solid darkorange;
+}
+
+.cell__border--spart {
+    border-right: 1px solid darkorange;
+}
+
+.cell__border--spart-bottom {
+    border-bottom: 1px solid darkorange;
+}
+
+.mitr {
+    color: purple;
+    border: 1px solid purple;
+}
+
+.cell__border--mitr {
+    border-right: 1px solid purple;
+}
+
+.not-dinast {
+    border: 1px solid var(--color-text);
+}
+
+.cell__border--not-dinast {
+    border-right: 1px solid var(--color-text);
+}
+
+.cell__border--not-dinast-bottom {
+    border-bottom: 1px solid var(--color-text);
+}
+
+.tib {
+    color: red;
+    border: 1px solid red;
+}
+
+.cell__border--tib {
+    border-right: 1px solid red;
+}
+
+.cell__border--tib-bottom {
+    border-bottom: 1px solid red;
 }
 
 .footer {
@@ -712,21 +787,6 @@ h4 {
 
 @media (min-width: 1000px) {
     
-    /* .intro {
-        display: grid;
-        grid-template-areas: 
-        "intro-container intro-container intro__picture-container"
-        "intro-container intro-container .";
-    }
-
-    .intro-container {
-        grid-area: intro-container;
-    }
-
-    .intro__picture-container {
-        grid-area: intro__picture-container;
-    } */
-
     .intro__text,
     .intro__nav {
         max-width: 70%;
