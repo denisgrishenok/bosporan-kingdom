@@ -24,6 +24,9 @@ html {
     --color-link-hover: #595959;
     --color-footer: #595959;
     --color-shadows: #9AA2A3;
+    --color-rulers-spart: #e45a0f; 
+    --color-rulers-mitr: #621483;
+    --color-rulers-tib: #e50d21;
 
 
     --border: 0.06rem solid var(--color-link);
@@ -509,30 +512,30 @@ h4 {
 }
 
 .arch {
-    color: darkblue;
-    border: 1px solid blue;
+    color: var(--color-link-hover);
+    border: 1px solid var(--color-link-hover);
 }
 
 .spart {
-    color: darkorange;
-    border: 1px solid darkorange;
+    color: var(--color-rulers-spart);
+    border: 1px solid var(--color-rulers-spart);
 }
 
 .cell__border--spart {
-    border-right: 1px solid darkorange;
+    border-right: 1px solid var(--color-rulers-spart);
 }
 
 .cell__border--spart-bottom {
-    border-bottom: 1px solid darkorange;
+    border-bottom: 1px solid var(--color-rulers-spart);
 }
 
 .mitr {
-    color: purple;
-    border: 1px solid purple;
+    color: var(--color-rulers-mitr);
+    border: 1px solid var(--color-rulers-mitr);
 }
 
 .cell__border--mitr {
-    border-right: 1px solid purple;
+    border-right: 1px solid var(--color-rulers-mitr);
 }
 
 .not-dinast {
@@ -548,16 +551,16 @@ h4 {
 }
 
 .tib {
-    color: red;
-    border: 1px solid red;
+    color: var(--color-rulers-tib);
+    border: 1px solid var(--color-rulers-tib);
 }
 
 .cell__border--tib {
-    border-right: 1px solid red;
+    border-right: 1px solid var(--color-rulers-tib);
 }
 
 .cell__border--tib-bottom {
-    border-bottom: 1px solid red;
+    border-bottom: 1px solid var(--color-rulers-tib);
 }
 
 .footer {
