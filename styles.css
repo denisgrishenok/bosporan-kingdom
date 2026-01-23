@@ -340,12 +340,20 @@ h4 {
     gap: 2rem;
 }
 
+.wrapper,
+.wrapper-reverse {
+    display: grid;
+    flex-direction: column;
+    gap: 2rem;        
+}
+
 .picture--container {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     gap: var(--container-padding-x);
+    
 }
 
 .picture--container-inner {
@@ -419,6 +427,7 @@ h4 {
     font-family: var(--font-family-support);
     color: var(--color-footer);
     font-size: 0.9rem;
+    
 }
 
 .map--container {
@@ -439,10 +448,6 @@ h4 {
 .map--img {
     width: clamp(18rem, 85vw, 73rem);
     height: auto;
-}
-
-.text--narrow {
-    max-width: 50rem;
 }
 
 .kimmeric__title::before,
@@ -791,12 +796,7 @@ h4 {
     .intro__nav {
         max-width: 70%;
     }
-    
-    .section--container {
-        grid-template-columns: repeat(3, 1fr);
-        gap: 2rem 4rem;
-    }
-    
+        
     .picture--container-inner {
         flex-direction: column;
     }
@@ -805,379 +805,30 @@ h4 {
         padding-left: 0;
     }
 
-    .kimmeric {
-        display: grid;
-        grid-template-areas: 
-        "kimmeric__title kimmeric__title kimmeric__title"
-        "kimmeric__text kimmeric__text kimmeric__picture-container"
-        "kimmeric__text kimmeric__text ."
-        "kimmeric__map-container kimmeric__map-container kimmeric__map-container"
-        "kimmeric__picture-container-left kimmeric__text-2 kimmeric__text-2"
-        ". kimmeric__text-2 kimmeric__text-2"
-        "kimmeric__map-container-2 kimmeric__map-container-2 kimmeric__map-container-2";
-    }
-
-    .kimmeric__title {
-        grid-area: kimmeric__title;
-    }
-
-    .kimmeric__text {
-         grid-area: kimmeric__text;
-    }
-
-    .kimmeric__picture-container {
-        grid-area: kimmeric__picture-container;
-    }
-
-    .kimmeric__map-container {
-        grid-area: kimmeric__map-container;
-        margin-bottom: 2rem;
-    }
-
-    .kimmeric__picture-container-left {
-        grid-area: kimmeric__picture-container-left;
-    }
-
-    .kimmeric__text-2 {
-        grid-area: kimmeric__text-2;
-    }
-
-    .kimmeric__map-container-2 {
-        grid-area: kimmeric__map-container-2;
-    }
-
-    .spartok {
-        display: grid;
-        grid-template-areas: 
-        "spartok__title spartok__title spartok__title"
-        "spartok__text spartok__text spartok__picture-container"
-        "spartok__text spartok__text ."
-        "spartok__map-container spartok__map-container spartok__map-container"
-        "spartok__picture-container-left spartok__text-2 spartok__text-2"
-        ". spartok__text-2 spartok__text-2"
-        "spartok__map-container-2 spartok__map-container-2 spartok__map-container-2"
-        "spartok__text-3 spartok__text-3 spartok__picture-container-2"
-        "spartok__text-3 spartok__text-3 ."
-        "spartok__large-picture-container spartok__large-picture-container spartok__large-picture-container"
-        "spartok__text-4 spartok__text-4 spartok__picture-container-2-1"
-        "spartok__large-picture-container-2 spartok__large-picture-container-2 spartok__large-picture-container-2"
-        "spartok__picture-container-left-2 spartok__text-5 spartok__text-5"
-        ". spartok__text-5 spartok__text-5"
-        "spartok__map-container-3 spartok__map-container-3 spartok__map-container-3"
-        "spartok__text-6 spartok__text-6 spartok__picture-container-3"
-        "spartok__text-6 spartok__text-6 ."
-        "spartok__large-picture-container-3 spartok__large-picture-container-3 spartok__large-picture-container-3"
-        "spartok__picture-container-left-3 spartok__text-7 spartok__text-7"
-        ". spartok__text-7 spartok__text-7"
-        "spartok__wide-picture-container spartok__wide-picture-container spartok__wide-picture-container"
-        "spartok__map-container-4 spartok__map-container-4 spartok__map-container-4"
-        "spartok__text-8 spartok__text-8 spartok__picture-container-4"
-        "spartok__text-8 spartok__text-8 ."
-        "spartok__map-container-5 spartok__map-container-5 spartok__map-container-5";
-    }
-
-    .spartok__title {
-        grid-area: spartok__title;
-    }
-
-    .spartok__text {
-        grid-area: spartok__text;
-    }
-
-    .spartok__picture-container {
-        grid-area: spartok__picture-container;
-    }
-
-    .spartok__map-container {
-        grid-area: spartok__map-container;
-    }
-
-    .spartok__picture-container-left {
-        grid-area: spartok__picture-container-left;
-    }
-
-    .spartok__text-2 {
-        grid-area: spartok__text-2;
-    }
-
-    .spartok__map-container-2 {
-        grid-area: spartok__map-container-2;
-    }
-
-    .spartok__text-3 {
-        grid-area: spartok__text-3;
-    }
-
-    .spartok__picture-container-2 {
-        grid-area: spartok__picture-container-2;
-    }
-
-    .spartok__large-picture-container {
-        grid-area: spartok__large-picture-container;
-    }
-
-    .spartok__text-4 {
-        grid-area: spartok__text-4;
-    }
-
-    .spartok__picture-container-2-1 {
-        grid-area: spartok__picture-container-2-1;
-    }
-
-    .spartok__large-picture-container-2 {
-        grid-area: spartok__large-picture-container-2;
-    }
-
-    .spartok__picture-container-left-2 {
-        grid-area: spartok__picture-container-left-2;
-    }
-
-    .spartok__text-5 {
-        grid-area: spartok__text-5;
-    }
-
-    .spartok__map-container-3 {
-        grid-area: spartok__map-container-3;
-    }
-
-    .spartok__text-6 {
-        grid-area: spartok__text-6;
-    }
-
-    .spartok__picture-container-3 {
-        grid-area: spartok__picture-container-3;
-    }
-
-    .spartok__large-picture-container-3 {
-        grid-area: spartok__large-picture-container-3;
-    }
-
-    .spartok__picture-container-left-3 {
-        grid-area: spartok__picture-container-left-3;
-    }
-
-    .spartok__text-7 {
-        grid-area: spartok__text-7;
-    }
-
-    .spartok__wide-picture-container {
-        grid-area: spartok__wide-picture-container;
-    }
-
-    .spartok__map-container-4 {
-        grid-area: spartok__map-container-4;
-    }
-
-    .spartok__text-8 {
-        grid-area: spartok__text-8;
-    }
-
-    .spartok__picture-container-4 {
-        grid-area: spartok__picture-container-4;
-    }
-
-    .spartok__map-container-5 {
-        grid-area: spartok__map-container-5;
-    }
-
     .kul-oba-description,
     .bliz-description,
     .vasy-description {
         max-width: 15rem;
     }
 
-    .mitridat {
-        display: grid;
-        grid-template-areas:
-        "mitridat__title mitridat__title mitridat__title"
-        "mitridat__text mitridat__text mitridat__picture-container"
-        "mitridat__text mitridat__text ."
-        "mitridat__map-container mitridat__map-container mitridat__map-container"
-        "mitridat__picture-container-left mitridat__text-2 mitridat__text-2"
-        ". mitridat__text-2 mitridat__text-2"
-        "mitridat__map-container-2 mitridat__map-container-2 mitridat__map-container-2"
-        "mitridat__text-3 mitridat__text-3 mitridat__picture-container-2"
-        "mitridat__text-3 mitridat__text-3 ."
-        "mitridat__map-container-3 mitridat__map-container-3 mitridat__map-container-3";         
+    .wrapper {
+        grid-template-columns: 70fr 30fr;
+        grid-template-areas: "text-area picture--container";
+        align-items: start;
     }
 
-    .mitridat__title {
-        grid-area: mitridat__title;
+    .wrapper-reverse {
+       grid-template-columns: 30fr 70fr;
+       grid-template-areas: "picture--container text-area";
+       align-items: start;
     }
 
-    .mitridat__text {
-        grid-area: mitridat__text;
+    .text-area {
+        grid-area: text-area;
     }
 
-    .mitridat__picture-container {
-        grid-area: mitridat__picture-container;
+    .picture--container {
+        grid-area: picture--container;
     }
 
-    .mitridat__map-container {
-        grid-area: mitridat__map-container;
-    }
-
-    .mitridat__picture-container-left {
-        grid-area: mitridat__picture-container-left;
-    }
-
-    .mitridat__text-2 {
-        grid-area: mitridat__text-2;
-    }
-
-    .mitridat__map-container-2 {
-        grid-area: mitridat__map-container-2;
-    }
-
-    .mitridat__text-3 {
-        grid-area: mitridat__text-3;
-    }
-
-    .mitridat__picture-container-2 {
-        grid-area: mitridat__picture-container-2;
-    }
-
-    .mitridat__map-container-3 {
-        grid-area: mitridat__map-container-3;
-    }
-
-    .tibery {
-        display: grid;
-        grid-template-areas:
-        "tibery__title tibery__title tibery__title"
-        "tibery__text tibery__text tibery__picture-container"
-        "tibery__text tibery__text ."
-        "tibery__map-container tibery__map-container tibery__map-container"
-        "tibery__picture-container-left tibery__text-2 tibery__text-2"
-        ". tibery__text-2 tibery__text-2"
-        "tibery__wide-picture-container tibery__wide-picture-container tibery__wide-picture-container"
-        "tibery__text-3 tibery__text-3 tibery__picture-container-2"
-        "tibery__text-3 tibery__text-3 ." 
-        "tibery__map-container-2 tibery__map-container-2 tibery__map-container-2"
-        "tibery__picture-container-left-2 tibery__text-4 tibery__text-4"
-        ". tibery__text-4 tibery__text-4"
-        "tibery__map-container-3 tibery__map-container-3 tibery__map-container-3"
-        "tibery__text-5 tibery__text-5 tibery__picture-container-3"
-        "tibery__text-5 tibery__text-5 ."
-        "tibery__map-container-4 tibery__map-container-4 tibery__map-container-4"
-        "tibery__text-6 tibery__text-6 tibery__text-6"
-        "tibery__wide-picture-container-2 tibery__wide-picture-container-2 tibery__wide-picture-container-2";
-    }
-
-    .tibery__title {
-        grid-area: tibery__title;
-    }
-
-    .tibery__text {
-        grid-area: tibery__text;
-    }
-
-    .tibery__picture-container {
-        grid-area: tibery__picture-container;
-    }
-
-    .tibery__map-container {
-        grid-area: tibery__map-container;
-    }
-
-    .tibery__picture-container-left {
-        grid-area: tibery__picture-container-left;
-    }
-
-    .tibery__text-2 {
-        grid-area: tibery__text-2;
-    }
-
-    .tibery__wide-picture-container {
-        grid-area: tibery__wide-picture-container;
-    }
-
-    .tibery__text-3 {
-        grid-area: tibery__text-3;
-    }
-
-    .tibery__picture-container-2 {
-        grid-area: tibery__picture-container-2;
-    }
-
-    .tibery__map-container-2 {
-        grid-area: tibery__map-container-2;
-    }
-
-    .tibery__picture-container-left-2 {
-        grid-area: tibery__picture-container-left-2;
-    }
-
-    .tibery__text-4 {
-        grid-area: tibery__text-4;
-    }
-
-    .tibery__map-container-3 {
-        grid-area: tibery__map-container-3;
-    }
-
-    .tibery__text-5 {
-        grid-area: tibery__text-5;
-    }
-
-    .tibery__picture-container-3 {
-        grid-area: tibery__picture-container-3;
-    }
-
-    .tibery__map-container-4 {
-        grid-area: tibery__map-container-4;
-    }
-
-    .tibery__text-6 {
-        grid-area: tibery__text-6;
-    }
-
-    .tibery__wide-picture-container-2 {
-        grid-area: tibery__wide-picture-container-2;
-    }
-
-    .late {
-        display: grid;
-        grid-template-areas:
-        "late__title late__title late__title"
-        "late__text late__text late__picture-container"
-        "late__text late__text ."
-        "late__map-container late__map-container late__map-container"
-        "late__picture-container-left late__text-2 late__text-2"
-        ". late__text-2 late__text-2"
-        "late__text-3 late__text-3 late__picture-container-2"
-        "late__text-3 late__text-3 .";
-    }
-
-    .late__title {
-        grid-area: late__title;
-    }
-
-    .late__text {
-        grid-area: late__text;
-    }
-
-    .late__picture-container {
-        grid-area: late__picture-container;
-    }
-
-    .late__map-container {
-        grid-area: late__map-container;
-    }
-
-    .late__picture-container-left {
-        grid-area: late__picture-container-left;
-    }
-
-    .late__text-2 {
-        grid-area: late__text-2;
-    }
-
-    .late__text-3 {
-        grid-area: late__text-3;
-    }
-
-    .late__picture-container-2 {
-        grid-area: late__picture-container-2;
-    }
 }
