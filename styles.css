@@ -20,8 +20,10 @@ html {
 :root {
     --color-text: #4C1E00;
     --color-light: #ffffff;
-    --color-link: #798A8D;
-    --color-link-hover: #595959;
+    --color-link: #586c6f;
+    /* --color-link: #798A8D; */
+    --color-link-hover: #4c4964;
+    /* --color-link-hover: #595959; */
     --color-footer: #595959;
     --color-shadows: #9AA2A3;
     --color-rulers-spart: #e45a0f; 
@@ -67,6 +69,19 @@ a {
 
 a:hover {
     color: var(--color-link-hover);
+}
+
+a:active {
+    color: var(--color-link-hover);
+}
+
+:focus {
+    outline-style: none;
+}
+
+:focus-visible {
+    outline: 1px solid var(--color-link-hover);
+    
 }
 
 .visually-hidden {
@@ -290,20 +305,30 @@ h4 {
     user-select: none;
     background-color: var(--color-light);
     color: var(--color-link);
+    cursor: pointer;
 }
 
-.intro__nav-item:hover {
-    cursor: pointer;
+.intro__nav-item:active {
     box-shadow: 0 0 0.2rem var(--color-link-hover);
     color: var(--color-link-hover);
 }
 
-.intro__nav-item:hover .intro__nav-icon-svg path {
-    stroke: var(--color-link-hover);
-}
+ .intro__nav-item:active .intro__nav-icon-svg path {
+        stroke: var(--color-link-hover);
+    }
 
-.intro__nav-item:hover .intro__nav-link p {
-    color: var(--color-link-hover);
+@media (hover: hover) and (pointer: fine) {
+
+    .intro__nav-item:hover {
+        
+        box-shadow: 0 0 0.2rem var(--color-link-hover);
+        color: var(--color-link-hover);
+    }
+
+    .intro__nav-item:hover .intro__nav-icon-svg path {
+        stroke: var(--color-link-hover);
+    }
+
 }
 
 .intro__nav-item:not(:last-child) {
@@ -380,14 +405,6 @@ h4 {
     gap: 1.5rem;
 }
 
-.picture--container-inner:hover {
-    box-shadow: 0 0 0.2rem var(--color-link-hover);
-}
-
-.picture--container-inner picture:hover {
-    cursor: pointer;
-}
-
 .large-picture--container {
     display: flex;
     flex-direction: column;
@@ -399,13 +416,33 @@ h4 {
     gap: 1.5rem;
 }
 
-.large-picture--container:hover {
+.picture--container-inner:active {
     box-shadow: 0 0 0.2rem var(--color-link-hover);
 }
 
-.large-picture--container picture:hover {
-    cursor: pointer;
+.large-picture--container:active {
+    box-shadow: 0 0 0.2rem var(--color-link-hover);
 }
+
+@media (hover: hover) and (pointer: fine) {
+
+    .picture--container-inner:hover {
+        box-shadow: 0 0 0.2rem var(--color-link-hover);
+    }
+
+    .picture--container-inner picture:hover {
+        cursor: pointer;
+    }
+
+    .large-picture--container:hover {
+        box-shadow: 0 0 0.2rem var(--color-link-hover);
+    }
+
+    .large-picture--container picture:hover {
+        cursor: pointer;
+    }
+}
+
 
 .double-picture--container {
     display: flex;
@@ -452,9 +489,16 @@ h4 {
     margin-bottom: 2rem;
 }
 
-.map--container:hover {
+.map--container:active {
     box-shadow: 0 0 0.2rem var(--color-link-hover);
-    cursor: pointer;
+
+}
+
+@media (hover: hover) and (pointer: fine) {
+    .map--container:hover {
+        box-shadow: 0 0 0.2rem var(--color-link-hover);
+        cursor: pointer;
+    }
 }
 
 .map--img {
@@ -613,18 +657,20 @@ h4 {
     stroke-width: 0.08rem;
 }
 
-
-.icon-list-item:hover .footer-icon-svg path {
-    stroke: var(--color-shadows);
-}
-
 .footer__link {
     color: var(--color-light);
     font-size: clamp(0.5rem, 1.5vw, 1rem);
 }
 
-.footer__link:hover {
-    color: var(--color-shadows);
+@media (hover: hover) and (pointer: fine) {
+    
+    .icon-list-item:hover .footer-icon-svg path {
+        stroke: var(--color-shadows);
+    }
+
+    .footer__link:hover {
+        color: var(--color-shadows);
+    }
 }
 
 @media (min-width: 360px) {
