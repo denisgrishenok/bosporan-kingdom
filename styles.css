@@ -176,8 +176,7 @@ h4 {
 
 .header__container-menu-list,
 .header__container-menu-container,
-.header__container-menu-item,
-.header__container-menu-wide {
+.header__container-menu-item {
     display: none;
 }
 
@@ -198,10 +197,6 @@ h4 {
     border-radius: var(--border-radius);
     border: none;
     padding: 0;
-}
-
-.header__button-svg:hover .header__button-icon-svg path {
-    stroke: var(--color-link-hover);
 }
 
 .header__button-icon-svg {
@@ -225,42 +220,41 @@ h4 {
     cursor: pointer;
 }
 
-.header__button:hover {
-    color: var(--color-link-hover);
-}
-
 .header__button-content {
     font-family: var(--font-family-support);
     font-weight: 400;
-    font-size: 1rem;
+    font-size: 0.9rem;
     text-transform: none;
     letter-spacing: 0.3rem;
     padding-inline: calc(var(--container-padding-x) / 2);
 }
 
-.header__button-content:hover {
+.header__button-content:active {
     color: var(--color-link-hover);
     border-color: var(--color-link-hover);
 }
 
-.header__button-burger {
-    display: flex;
+.header__button:active {
+    color: var(--color-link-hover);
 }
 
-.header__button-burger-item {
-    display: inline-flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    row-gap: 0.25rem;
+.header__button-svg:active .header__button-icon-svg path {
+    stroke: var(--color-link-hover);
 }
 
-.header__button-burger-line {
-    
-    width: 1rem;
-    height: 0.125rem;
-    background-color: currentColor;
+@media (hover: hover) and (pointer: fine) {
+    .header__button-content:hover {
+    color: var(--color-link-hover);
+    border-color: var(--color-link-hover);
+    }
+    .header__button:hover {
+    color: var(--color-link-hover);
+    }
+    .header__button-svg:hover .header__button-icon-svg path {
+    stroke: var(--color-link-hover);
+    }
 }
+
 
 .content {
     display: flex;
@@ -674,11 +668,7 @@ h4 {
 }
 
 @media (min-width: 360px) {
-    
-    .header__button-burger {
-        display: none;
-    }
-    
+     
     .header__container-menu-wide {
         display: flex;
     }
