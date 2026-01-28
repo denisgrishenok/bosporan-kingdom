@@ -220,7 +220,7 @@ h4 {
 .header__button-content {
     font-family: var(--font-family-support);
     font-weight: 400;
-    font-size: 0.9rem;
+    font-size: clamp(0.75rem, 2vw, 1rem);
     text-transform: none;
     letter-spacing: 0.3rem;
     padding-inline: calc(var(--container-padding-x) / 2);
