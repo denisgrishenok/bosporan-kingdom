@@ -115,16 +115,13 @@ h4 {
 .title--h2 {
     display: flex;
     align-items: center;
-    font-size: clamp(1.1rem, 2vw, 1.4rem);
+    font-size: clamp(1rem, 2vw, 1.4rem);
     margin-top: calc(var(--container-padding-x) * 3);
 }
 
-.title--h3 {
-    font-size: clamp(1rem, 2vw, 1rem);
-}
-
+.title--h3,
 .title--h4 {
-    font-size: clamp(1rem, 2vw, 1rem);
+    font-size: clamp(0.9rem, 2vw, 1rem);
 }
 
 .small--text {
@@ -506,33 +503,39 @@ h4 {
 .tibery__title::before,
 .late__title::before,
 .appendix__title::before {
+    content: "";
+    display: inline-block;
     margin-right: var(--container-padding-x);
-    height: 4rem;
+    width: clamp(2.8rem, 5vw, 4rem);
     aspect-ratio: 1;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
 }
 
 .kimmeric__title::before {
-    content: url(./Icons/icon-Apollo-text.svg);
+    background-image: url(./Icons/icon-Apollo-text.svg);
 }
 
 .spartok__title::before {
-    content: url(./Icons/icon-Spartokids-text.svg);
+    background-image: url(./Icons/icon-Spartokids-text.svg);
 }
 
 .mitridat__title::before {
-    content: url(./Icons/icon-Mitridat-text.svg);
+    background-image: url(./Icons/icon-Mitridat-text.svg);
 }
 
 .tibery__title::before {
-    content: url(./Icons/icon-Tiberiy-text.svg);
+    background-image: url(./Icons/icon-Tiberiy-text.svg);
 }
 
 .late__title::before {
-    content: url(./Icons/icon-Late-Rome-text.svg);
+    background-image: url(./Icons/icon-Late-Rome-text.svg);
 }
 
 .appendix__title::before {
-    content: url(./Icons/icon-appendix-text.svg);
+    background-image: url(./Icons/icon-appendix-text.svg);
+    width: clamp(4rem, 7vw, 5.1rem);
 }
 
 .appendix__rulers {
