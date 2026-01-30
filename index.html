@@ -10,6 +10,7 @@
 </head>
 <body>
     <header class="header">
+        
         <div class="header__container">     
             <div class="header__container-logo">
                 <a class="header__logo"
@@ -105,17 +106,24 @@
                 </nav>
                 <nav class="header__container-menu-wide">         
                     <button class="header__button-content header__button" 
-                    type="button" 
+                    type="button"
+                    aria-expanded="false"
+                    aria-controls="header-dropdown" 
                     title="Открыть список разделов">
                     меню
                         <span class="visually-hidden">
                             Открыть список разделов
                         </span>
                     </button>
+                    <ul class="header__dropdown" id="header-dropdown">
+
+                    </ul>
                 </nav>
             </div>    
-        </div>    
+        </div>
+        <div class="header__overlay"></div>    
     </header>
+    
     <main class="content">
         <section class="intro">
             <div class="intro-container">
