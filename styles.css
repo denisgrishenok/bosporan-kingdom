@@ -360,12 +360,14 @@ h4 {
     cursor: pointer;
 }
 
-.intro__nav-item:active {
+.intro__nav-item:active,
+.intro__nav-item.is-active {
     box-shadow: 0 0 0.2rem var(--color-link-hover);
     color: var(--color-link-hover);
 }
 
- .intro__nav-item:active .intro__nav-icon-svg path {
+.intro__nav-item:active .intro__nav-icon-svg path,
+.intro__nav-item.is-active .intro__nav-icon-svg path {
         stroke: var(--color-link-hover);
     }
 
@@ -391,6 +393,12 @@ h4 {
     position: absolute;
     inset: 0;
     z-index: 1;
+}
+
+.intro__nav-overlay-link:hover,
+.intro__nav-overlay-link:focus-visible,
+.intro__nav-overlay-link.is-active {
+    color: var(--color-link-hover);
 }
 
 .intro__nav-description {
