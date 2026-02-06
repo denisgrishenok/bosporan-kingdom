@@ -22,7 +22,8 @@ html {
     --color-light: #ffffff;
     --color-link: #586c6f;
     /* --color-link: #798A8D; */
-    --color-link-hover: #230134;
+    --color-link-hover: #44004E;
+    /* --color-link-hover: #230134; */
     /* --color-link-hover: #4c4964; */
     /* --color-link-hover: #595959; */
     --color-footer: #595959;
@@ -147,12 +148,12 @@ h4 {
 }
 
 .header__overlay {
-    /* position: fixed; */
+    
     position: absolute;
     top: 100%;
     left: 0;
     right: 0;
-    /* bottom: 0; */
+    
     height: 100vh;
     background-color: rgba(0, 0, 0, 0.25);
     backdrop-filter: blur(6px);
@@ -301,17 +302,38 @@ h4 {
 }
 
 .header__dropdown .intro__nav-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
     width: 29.5rem;      
 }
 
-.header__dropdown .intro__nav-item {
+.header__dropdown .menu-item--dropdown {
     display: grid;
     grid-template-columns: repeat(1, 1fr);
+    
         
 }
 
 .header__dropdown .intro__nav-description {
     display: none;
+}
+
+.mobile-menu {
+    position: fixed;
+    inset: 0;
+    background: var(--color-light);
+    z-index: 30;
+
+    transform: translateX(100%);
+    transition: transform 0.3s ease;
+
+    pointer-events: none;
+}
+
+.mobile-menu.is-open {
+    transform: translateX(0);
+    pointer-events: auto;
 }
 
 .content {
@@ -328,8 +350,8 @@ h4 {
     min-height: calc(100vh - var(--header-height));
     min-height: calc(100dvh - var(--header-height));
     background-image: image-set(
-        url("./Images/intro-bg.avif.avif") type("image/avif"),
-        url("./Images/intro-bg.webp.webp") type("image/webp")
+        url("@assets/images/intro-bg_a") type("image/avif"),
+        url("@assets/images/intro-bg_w") type("image/webp")
     );
     background-size: cover;
     background-position: center;
@@ -346,7 +368,8 @@ h4 {
     padding-inline: var(--container-padding-x);
 }
 
-.intro__nav-item {
+.menu-item--main,
+.menu-item--dropdown {
     position: relative;
     display: grid;
     height: 8rem;
@@ -360,32 +383,40 @@ h4 {
     cursor: pointer;
 }
 
-.intro__nav-item:active,
-.intro__nav-item.is-active {
+.menu-item--main:active,
+.menu-item--main.is-active,
+.menu-item--dropdown:active,
+.menu-item--dropdown.is-active {
     box-shadow: 0 0 0.2rem var(--color-link-hover);
     color: var(--color-link-hover);
 }
 
-.intro__nav-item:active .intro__nav-icon-svg path,
-.intro__nav-item.is-active .intro__nav-icon-svg path {
+.menu-item--main:active .intro__nav-icon-svg path,
+.menu-item--main.is-active .intro__nav-icon-svg path,
+.menu-item--dropdown:active .intro__nav-icon-svg path,
+.menu-item--dropdown.is-active .intro__nav-icon-svg path {
         stroke: var(--color-link-hover);
     }
 
 @media (hover: hover) and (pointer: fine) {
 
-    .intro__nav-item:hover {
+    .menu-item--main:hover,
+    .menu-item--dropdown:hover {
         
         box-shadow: 0 0 0.2rem var(--color-link-hover);
         color: var(--color-link-hover);
     }
 
-    .intro__nav-item:hover .intro__nav-icon-svg path {
+    .menu-item--main:hover .intro__nav-icon-svg path,
+    .menu-item--dropdown:hover .intro__nav-icon-svg path {
         stroke: var(--color-link-hover);
     }
 
 }
 
-.intro__nav-item:not(:last-child) {
+
+.menu-item--main:not(:last-child)
+.menu-item--dropdown:not(:last-child) {
     margin-bottom: 1rem;
 }
 
@@ -744,7 +775,8 @@ h4 {
         display: flex;
     }
 
-    .intro__nav-item {
+    .menu-item--main,
+    .menu-item--dropdown {
         height: 5.5rem;
     }
 
@@ -781,7 +813,7 @@ h4 {
 
 @media (min-width: 700px) {
      
-    .intro__nav-item {
+    .menu-item--main {
     grid-template-columns: repeat(2, 1fr);
     }
 
