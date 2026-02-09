@@ -1,0 +1,82 @@
+@use '../abstracts/functions' as *;
+@use '../abstracts/mixins' as *;
+@use '../abstracts/variables' as *;
+
+:root {
+
+    --color-text: #{$color-text};
+    --color-light: #{$color-light};
+    --color-link: #{$color-link};
+    --color-link-hover: #{$color-link-hover};
+    --color-footer: #{$color-footer};
+    --color-shadows: #{$color-shadows};
+
+    --color-rulers-spart: #{$color-rulers-spart};
+    --color-rulers-mitr: #{$color-rulers-mitr};
+    --color-rulers-tib: #{$color-rulers-tib};
+
+    --font-family-base: #{$font-family-base};
+    --font-family-support: #{$font-family-support};
+
+    --root-font-size: #{$root-font-size}; 
+
+    --container-width: #{$container-width};
+
+    --container-padding-x: #{fluid-value(
+        $container-padding-x-min,
+        $container-padding-x-max
+    )};
+
+    --header-height: #{fluid-value(
+        $header-height-min,
+        $header-height-max
+    )};
+
+    --transition-duration: #{$transition-duration}; 
+
+    --border-radius: #{rem($border-radius)};
+    --border: #{rem($border-width)} solid #{$color-link};
+    --border-hover: #{rem($border-width)} solid #{$color-link-hover};
+
+    --fluid-min-viewport: #{$fluid-min-viewport};
+    --fluid-max-viewport: #{$fluid-max-viewport};
+
+
+}
+
+body {
+    font-family: var(--font-family-base);
+    font-size: var(--root-font-size);
+    line-height: 1.5;
+    min-height: 100%;
+    color: var(--color-text);
+    background-color: var(--color-light);
+    overflow-x: hidden;
+}
+
+a, button, input, textarea, svg * {
+    transition-duration: var(--transition-duration);
+}
+
+a {
+    color: var(--color-link);
+    text-decoration: none;
+}
+
+a:hover {
+    color: var(--color-link-hover);
+}
+
+a:active {
+    color: var(--color-link-hover);
+}
+
+
+:focus {
+    outline-style: none;
+}
+
+:focus-visible {
+    outline: rem(1) solid var(--color-link-hover);
+    
+}

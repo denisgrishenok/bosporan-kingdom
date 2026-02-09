@@ -1,0 +1,30 @@
+@use '../abstracts/functions' as *;
+@use '../abstracts/mixins' as *;
+
+h1, h2, h3 {
+    text-transform: uppercase;
+}
+
+.title--h1 {
+    @include fluid-text(24, 32);
+    @include fluid-space(margin-top, 20, 32);
+    @include fluid-space(margin-bottom, 5, 10);
+    
+}
+
+.title--h2 {
+    display: flex;
+    align-items: center;
+    @include fluid-text(16, 22);
+    @include fluid-space(margin-top, 48, 96);
+    
+}
+
+.title--h3,
+.title--h4 {
+    @include fluid-text(14.5, 16);
+}
+
+.small--text {
+    @include fluid-text(10, 12);
+}

@@ -21,13 +21,12 @@ html {
     --color-text: #4C1E00;
     --color-light: #ffffff;
     --color-link: #586c6f;
-    /* --color-link: #798A8D; */
+    
     --color-link-hover: #44004E;
-    /* --color-link-hover: #230134; */
-    /* --color-link-hover: #4c4964; */
-    /* --color-link-hover: #595959; */
+    
     --color-footer: #595959;
     --color-shadows: #9AA2A3;
+    
     --color-rulers-spart: #e45a0f; 
     --color-rulers-mitr: #621483;
     --color-rulers-tib: #e50d21;

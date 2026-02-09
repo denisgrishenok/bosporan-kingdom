@@ -1,0 +1,14 @@
+:where(ul, ol)[class] {
+    padding-left: 0;
+    list-style: none;
+}
+
+html {
+    height: 100%;
+    scrollbar-gutter: stable;
+    scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+}

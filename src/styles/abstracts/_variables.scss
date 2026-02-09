@@ -1,0 +1,43 @@
+@use './functions' as *;
+
+/* ===== COLORS ===== */
+
+$color-text: #4C1E00;
+$color-light: #ffffff;
+$color-link: #586c6f;
+$color-link-hover: #44004E;
+$color-footer: #595959;
+$color-shadows: #9AA2A3;
+
+$color-rulers-spart: #e45a0f; 
+$color-rulers-mitr: #621483;
+$color-rulers-tib: #e50d21;
+
+/* ===== TYPOGRAPHY ===== */
+
+$font-family-base: Georgia, serif;
+$font-family-support: Arial, sans-serif;
+
+$root-font-size: 16;
+
+/* ===== LAYOUT ===== */
+
+$container-width: 1200;
+
+$container-padding-x-min: 16;
+$container-padding-x-max: 32;
+
+$header-height-min: 48;
+$header-height-max: 72;
+
+/* ===== UI ===== */
+
+$transition-duration: 0.2s;
+
+$border-radius: 30;
+$border-width: 1;
+
+/* ===== VIEWPORT LIMITS ===== */
+
+$fluid-min-viewport: 360;
+$fluid-max-viewport: 1400;

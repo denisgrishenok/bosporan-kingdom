@@ -1,0 +1,39 @@
+@use 'sass:math';
+@use './functions' as *;
+@use './variables' as *;
+
+@function fluid-value($min, $max) {
+    $slope: math.div(($max - $min), ($fluid-max-viewport - $fluid-min-viewport));
+    $y: $min - ($slope * $fluid-min-viewport);
+
+    @return clamp(
+        rem($min),
+        rem($y) + $slope * 100vw,
+        rem($max)
+    );
+}
+
+@mixin fluid-text($min, $max) {
+    font-size: fluid-value($min, $max);
+}
+
+@mixin fluid-space($property, $min-values, $max-values) {
+    @if length($min-values) != length($max-values) {
+        @error 'fluid-space(): min and max values ​​must be specified'
+    }
+
+    $result: ();
+
+    @for $i from 1 through length($min-values) {
+        $result: append($result, fluid-value(nth($min-values, $i), nth($max-values,$i)), space);
+    }
+
+    #{$property}: $result;
+    
+}
+
+@mixin flex-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
