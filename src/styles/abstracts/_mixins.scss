@@ -1,4 +1,5 @@
 @use 'sass:math';
+@use 'sass:list';
 @use './functions' as *;
 @use './variables' as *;
 
@@ -18,14 +19,14 @@
 }
 
 @mixin fluid-space($property, $min-values, $max-values) {
-    @if length($min-values) != length($max-values) {
+    @if list.length($min-values) != list.length($max-values) {
         @error 'fluid-space(): min and max values ​​must be specified'
     }
 
     $result: ();
 
-    @for $i from 1 through length($min-values) {
-        $result: append($result, fluid-value(nth($min-values, $i), nth($max-values,$i)), space);
+    @for $i from 1 through list.length($min-values) {
+        $result: list.append($result, fluid-value(list.nth($min-values, $i), list.nth($max-values,$i)), space);
     }
 
     #{$property}: $result;
@@ -36,4 +37,24 @@
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+@mixin interactive($hover-color) {
+    
+    @media (hover: hover) and (pointer: fine) {
+        &:hover {
+            color: $hover-color;
+            border-color: var(--color-link-hover);
+        }
+    }
+
+    &:active {
+        color: $hover-color;
+        border-color: var(--color-link-hover);
+    }
+
+    &:focus-visible {
+        outline: rem(1) solid $hover-color;
+                
+    }
 }

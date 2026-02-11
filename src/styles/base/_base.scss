@@ -18,9 +18,9 @@
     --font-family-base: #{$font-family-base};
     --font-family-support: #{$font-family-support};
 
-    --root-font-size: #{$root-font-size}; 
+    --root-font-size: #{rem($root-font-size)}; 
 
-    --container-width: #{$container-width};
+    --container-width: #{rem($container-width)};
 
     --container-padding-x: #{fluid-value(
         $container-padding-x-min,
@@ -38,8 +38,8 @@
     --border: #{rem($border-width)} solid #{$color-link};
     --border-hover: #{rem($border-width)} solid #{$color-link-hover};
 
-    --fluid-min-viewport: #{$fluid-min-viewport};
-    --fluid-max-viewport: #{$fluid-max-viewport};
+    --fluid-min-viewport: #{rem($fluid-min-viewport)};
+    --fluid-max-viewport: #{rem($fluid-max-viewport)};
 
 
 }
@@ -61,22 +61,8 @@ a, button, input, textarea, svg * {
 a {
     color: var(--color-link);
     text-decoration: none;
+    transition: color var(--transition-duration);
+
+    @include interactive(var(--color-link-hover));
 }
 
-a:hover {
-    color: var(--color-link-hover);
-}
-
-a:active {
-    color: var(--color-link-hover);
-}
-
-
-:focus {
-    outline-style: none;
-}
-
-:focus-visible {
-    outline: rem(1) solid var(--color-link-hover);
-    
-}

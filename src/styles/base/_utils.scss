@@ -15,7 +15,7 @@ body.menu-open {
     overflow: hidden !important;
 }
 
-.overlay {
+.header__overlay {
     
     position: fixed;
     inset: 0;
@@ -27,10 +27,11 @@ body.menu-open {
     pointer-events: none;
     transition: opacity 0.2s ease;
     z-index: 10;
-}
 
-.overlay.is-active {
-    opacity: 1;
-    visibility: visible;
-    pointer-events: auto;
+
+    &.is-active {
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
+    }
 }

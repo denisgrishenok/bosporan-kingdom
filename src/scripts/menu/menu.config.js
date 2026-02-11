@@ -2,7 +2,7 @@ export const menuItems = [
     {
         id: 'kimmeric',
         href: '#section-kimmeric',
-        contexts: ['main', 'dropdown', 'mobile'],
+        contexts: ['main', 'dropdown'],
         type: 'card',
         title: 'Боспор Киммерийский',
         subtitle: '600 - 437 гг. до н.э.',
@@ -23,7 +23,7 @@ export const menuItems = [
     {
         id: 'history-and-map',
         href: 'https://hisma.ru',
-        contexts: ['dropdown', 'mobile'],
+        contexts: ['dropdown'],
         type: 'link',
         label: 'История и Карта',
         external: true,

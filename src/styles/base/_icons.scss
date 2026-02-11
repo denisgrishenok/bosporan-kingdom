@@ -1,0 +1,13 @@
+@use '../abstracts/mixins' as *;
+@use '../abstracts/functions' as *;
+
+.logo {
+    display: block;
+    height: calc(var(--header-height) / 1.8);
+}
+
+.icon {
+    display: block;
+    stroke: currentColor;
+    fill: none;
+}
