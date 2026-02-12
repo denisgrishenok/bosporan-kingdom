@@ -1,7 +1,7 @@
 import '@scss/main.scss';
 
-import { initMenu } from "@js/menu/menu.controller.js";
+import { initHeaderMenu } from './menu/header-menu.js';
 
 document.addEventListener('DOMContentLoaded', () => {
-    initMenu();
+    initHeaderMenu();
 });
