@@ -52,6 +52,10 @@ body {
     color: var(--color-text);
     background-color: var(--color-light);
     overflow-x: hidden;
+
+        &.menu-open {
+        overflow: hidden;
+    }
 }
 
 a, button, input, textarea, svg * {
@@ -66,3 +70,24 @@ a {
     @include interactive(var(--color-link-hover));
 }
 
+.content {
+    display: flex;
+    margin-inline: auto;
+    flex-direction: column;
+    max-width: var(--container-width);
+    padding-inline: var(--container-padding-x);
+}
+
+.section--container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: rem(32);
+}
+
+.wrapper,
+.wrapper-reverse {
+    display: grid;
+    flex-direction: column;
+    gap: rem(32);        
+}

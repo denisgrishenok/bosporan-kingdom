@@ -6,7 +6,7 @@
     @include flex-center;
     position: sticky;
     top: 0;
-    // z-index: 20;
+    z-index: 20;
     background: var(--color-light);
     height: var(--header-height);
     box-shadow: 0 0 rem(24) var(--color-shadows);
@@ -53,6 +53,26 @@
         @include interactive(var(--color-link-hover));       
     }
 
+    &__dropdown {
+        position: absolute;
+        top: 100%;
+        right: 0;
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+        transform: translateY(rem(8));
+        transition: opacity 0.2s ease, transform 0.2s ease;
+        z-index: 20;
+
+
+            &.is-open {
+                opacity: 1;
+                visibility: visible;
+                pointer-events: auto;
+                transform: translateY(rem(35));
+            }
+        }
+
     .icon {
         height: calc(var(--header-height) / 1.8);
     }
@@ -62,25 +82,8 @@
 
 
 
-.header__dropdown {
-    position: absolute;
-    top: 100%;
-    right: 0;
-    opacity: 0;
-    visibility: hidden;
-    pointer-events: none;
-    transform: translateY(0.5rem);
-    transition: opacity 0.2s ease, transform 0.2s ease;
-    z-index: 20;
 
 
-    &.is-open {
-    opacity: 1;
-    visibility: visible;
-    pointer-events: auto;
-    transform: translateY(2.2rem);
-    }
-}
 
 
 

@@ -44,17 +44,33 @@
     @media (hover: hover) and (pointer: fine) {
         &:hover {
             color: $hover-color;
-            border-color: var(--color-link-hover);
+            border-color: $hover-color;
+            
         }
     }
 
     &:active {
         color: $hover-color;
-        border-color: var(--color-link-hover);
+        border-color: $hover-color;
+        
     }
 
     &:focus-visible {
         outline: rem(1) solid $hover-color;
                 
     }
+}
+
+@mixin interactive-box-shadow($hover-color) {
+    
+    @media (hover: hover) and (pointer: fine) {
+        &:hover {
+            box-shadow: 0 0 rem(3) $hover-color;
+        }
+    }
+
+        &:active {
+            box-shadow: 0 0 rem(3) $hover-color;
+        }
+
 }
