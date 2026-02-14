@@ -1,0 +1,20 @@
+@use '../abstracts/functions' as *;
+@use '../abstracts/mixins' as *;
+
+.map--container {
+    display: flex;
+    justify-content: center;
+    border: transparent;
+    border-radius: var(--border-radius);
+    box-shadow: 0 0 rem(3) var(--color-shadows);
+    padding: var(--container-padding-x);
+    margin-bottom: rem(32);
+
+    @include interactive-box-shadow(var(--color-link-hover));
+}
+
+.map--img {
+    @include fluid-space(width, 288, 1168);
+    height: auto;
+    cursor: pointer;
+}

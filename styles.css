@@ -473,7 +473,7 @@ h4 {
     gap: 2rem;        
 } */
 
-.picture--container {
+/* .picture--container {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -492,9 +492,9 @@ h4 {
     box-shadow: 0 0 0.2rem var(--color-shadows);
     padding: 1.5rem;
     gap: 1.5rem;
-}
+} */
 
-.large-picture--container {
+/* .large-picture--container {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -503,9 +503,9 @@ h4 {
     box-shadow: 0 0 0.2rem var(--color-shadows);
     padding: 1.5rem;
     gap: 1.5rem;
-}
+} */
 
-.picture--container-inner:active {
+/* .picture--container-inner:active {
     box-shadow: 0 0 0.2rem var(--color-link-hover);
 }
 
@@ -530,23 +530,23 @@ h4 {
     .large-picture--container picture:hover {
         cursor: pointer;
     }
-}
+} */
 
 
-.double-picture--container {
+/* .double-picture--container {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
     gap: 3rem;
-}
+} */
 
-.wide-picture--container {
+/* .wide-picture--container {
     display: flex;
-}
+} */
 
-.small-picture--img {
+/* .small-picture--img {
     width: clamp(7rem, 10vw, 9rem);
     height: auto;
 }
@@ -554,21 +554,21 @@ h4 {
 .picture--img {
     width: clamp(11rem, 15vw, 15rem);
     height: auto;
-}
+} */
 
-.wide-picture--img {
+/* .wide-picture--img {
     width: clamp(18rem, 40vw, 45rem);
     height: auto;
-}
+} */
 
-.picture--description {
+/* .picture--description {
     font-family: var(--font-family-support);
     color: var(--color-footer);
     font-size: 0.9rem;
     
-}
+} */
 
-.map--container {
+/* .map--container {
     display: flex;
     justify-content: center;
     border: transparent;
@@ -576,9 +576,9 @@ h4 {
     box-shadow: 0 0 0.2rem var(--color-shadows);
     padding: var(--container-padding-x);
     margin-bottom: 2rem;
-}
+} */
 
-.map--container:active {
+/* .map--container:active {
     box-shadow: 0 0 0.2rem var(--color-link-hover);
 
 }
@@ -588,12 +588,12 @@ h4 {
         box-shadow: 0 0 0.2rem var(--color-link-hover);
         cursor: pointer;
     }
-}
+} */
 
-.map--img {
+/* .map--img {
     width: clamp(18rem, 85vw, 73rem);
     height: auto;
-}
+} */
 
 .kimmeric__title::before,
 .spartok__title::before,

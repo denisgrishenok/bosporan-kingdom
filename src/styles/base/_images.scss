@@ -1,0 +1,77 @@
+@use '../abstracts/functions' as *;
+@use '../abstracts/mixins' as *;
+
+.picture--container {
+    @include flex-center;
+    flex-direction: column;
+    gap: var(--container-padding-x);
+    
+}
+
+.picture--container-inner {
+    @include flex-center;
+    flex-direction: column;
+    border: transparent;
+    border-radius: var(--border-radius);
+    box-shadow: 0 0 rem(3) var(--color-shadows);
+    padding: rem(24);
+    gap: rem(24);
+
+    @include interactive-box-shadow(var(--color-link-hover));
+}
+
+.large-picture--container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: transparent;
+    border-radius: var(--border-radius);
+    box-shadow: 0 0 rem(3) var(--color-shadows);
+    padding: rem(24);
+    gap: rem(24);
+
+    @include interactive-box-shadow(var(--color-link-hover));
+}
+
+.double-picture--container {
+    @include flex-center;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: rem(48);
+}
+
+.wide-picture--container {
+    display: flex;
+}
+
+.picture--img {
+    @include fluid-space(width, 176, 240);
+    height: auto;
+    cursor: pointer;
+}
+
+.small-picture--img {
+    @include fluid-space(width, 112, 144);
+    height: auto;
+    cursor: pointer;
+}
+
+.wide-picture--img {
+    @include fluid-space(width, 288, 720);
+    height: auto;
+    cursor: pointer;
+}
+
+.picture--description {
+    font-family: var(--font-family-support);
+    color: var(--color-footer);
+    font-size: 0.9rem;
+    
+}
+
+.picture--description {
+    font-family: var(--font-family-support);
+    color: var(--color-footer);
+    font-size: rem(14);
+    
+}
