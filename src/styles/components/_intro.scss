@@ -46,6 +46,11 @@
         
         @include interactive-box-shadow(var(--color-link-hover));
 
+        &.is-active {
+            color: var(--color-link-hover);
+            box-shadow: 0 0 rem(3) var(--color-link-hover);
+        }
+
     }
 
   

@@ -17,6 +17,7 @@ export function initHeaderMenu() {
         buttonMenu.setAttribute('aria-expanded', 'true');
 
         highlightActiveLink();
+
     }
 
     const closeMenu = ({returnFocus = true} = {}) => {
@@ -70,10 +71,9 @@ export function initHeaderMenu() {
         const links = dropdownMenu.querySelectorAll('.intro__link');
 
         links.forEach(link => {
-            const parentItem = link.closest('.intro__item');
-            if (!parentItem) return;
-
-            parentItem.classList.toggle('is-active', link.hash === `#${currentId}`);
+            const isActive = link.getAttribute('href') === `#${currentId}`;
+            link.classList.toggle('is-active', isActive);
+            
         })
     }
 
