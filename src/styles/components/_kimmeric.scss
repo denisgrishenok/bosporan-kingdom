@@ -1,0 +1,8 @@
+@use '../abstracts/functions' as *;
+@use '../abstracts/mixins' as *;
+
+.kimmeric__title::before {
+    background-image: url(@assets/icons/icon-Apollo-text.svg);
+
+    @include section-title;
+}

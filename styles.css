@@ -595,7 +595,7 @@ h4 {
     height: auto;
 } */
 
-.kimmeric__title::before,
+/* .kimmeric__title::before,
 .spartok__title::before,
 .mitridat__title::before,
 .tibery__title::before,
@@ -609,27 +609,27 @@ h4 {
     background-repeat: no-repeat;
     background-size: contain;
     background-position: center;
-}
+} */
 
-.kimmeric__title::before {
+/* .kimmeric__title::before {
     background-image: url(./Icons/icon-Apollo-text.svg);
-}
+} */
 
-.spartok__title::before {
+/* .spartok__title::before {
     background-image: url(./Icons/icon-Spartokids-text.svg);
-}
+} */
 
-.mitridat__title::before {
+/* .mitridat__title::before {
     background-image: url(./Icons/icon-Mitridat-text.svg);
-}
+} */
 
-.tibery__title::before {
+/* .tibery__title::before {
     background-image: url(./Icons/icon-Tiberiy-text.svg);
-}
+} */
 
-.late__title::before {
+/* .late__title::before {
     background-image: url(./Icons/icon-Late-Rome-text.svg);
-}
+} */
 
 .appendix__title::before {
     background-image: url(./Icons/icon-appendix-text.svg);

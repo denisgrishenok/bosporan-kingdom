@@ -1,0 +1,8 @@
+@use '../abstracts/functions' as *;
+@use '../abstracts/mixins' as *;
+
+.late__title::before {
+    background-image: url(@assets/icons/icon-Late-Rome-text.svg);
+
+    @include section-title;
+}

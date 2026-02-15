@@ -1,0 +1,16 @@
+@use '../abstracts/functions' as *;
+@use '../abstracts/mixins' as *;
+
+.appendix__title::before {
+    background-image: url(@assets/icons/icon-appendix-text.svg);
+
+    content: "";
+    display: inline-block;
+    margin-right: var(--container-padding-x);
+    aspect-ratio: 1;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+
+    @include fluid-space(width, 55, 80);
+}

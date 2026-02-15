@@ -1,0 +1,8 @@
+@use '../abstracts/functions' as *;
+@use '../abstracts/mixins' as *;
+
+.mitridat__title::before {
+    background-image: url(@assets/icons/icon-Mitridat-text.svg);
+
+    @include section-title;
+}

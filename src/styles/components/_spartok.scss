@@ -1,0 +1,8 @@
+@use '../abstracts/functions' as *;
+@use '../abstracts/mixins' as *;
+
+.spartok__title::before {
+    background-image: url(@assets/icons/icon-Spartokids-text.svg);
+
+    @include section-title;
+}
