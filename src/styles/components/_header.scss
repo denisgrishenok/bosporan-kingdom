@@ -10,6 +10,7 @@
     background: var(--color-light);
     height: var(--header-height);
     box-shadow: 0 0 rem(24) var(--color-shadows);
+    padding-inline: var(--container-padding-x);
 
     &__container {
         display: flex;
@@ -17,6 +18,11 @@
         align-items: center;
         width: 100%;
         max-width: var(--container-width);      
+    }
+
+    &__menu {
+        display: flex;
+        justify-content: flex-end;
     }
 
     &__menu-list {
