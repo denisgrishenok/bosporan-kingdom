@@ -711,53 +711,53 @@ h4 {
     border-bottom: 1px solid var(--color-rulers-tib);
 } */
 
-.footer {
+/* .footer {
     padding: var(--container-padding-x);
     background-color: var(--color-footer);
     margin-top: calc(var(--container-padding-x) * 2);
-}
+} */
 
-.footer__container {
+/* .footer__container {
     display: grid;
     gap: 1rem;
     width: 100%;
     max-width: var(--container-width);
     height: auto;
     margin: auto;
-}
+} */
 
-.footer__logo-svg {
+/* .footer__logo-svg {
     height: 1.8rem;
     width: auto;
-}
+} */
 
-.footer-icon-svg {
+/* .footer-icon-svg {
     height: calc(var(--header-height) / 2);
     width: auto;
-}
+} */
 
-.footer--text {
+/* .footer--text {
     color: var(--color-light);
     font-family: var(--font-family-support);
     font-size: clamp(0.6rem, 2vw, 0.9rem);
-}
+} */
 
-.footer__icon-list {
+/* .footer__icon-list {
     display: flex;
     gap: 2rem;
-}
+} */
 
-.footer-icon-svg path {
+/* .footer-icon-svg path {
     stroke: var(--color-light);
     stroke-width: 0.08rem;
-}
+} */
 
-.footer__link {
+/* .footer__link {
     color: var(--color-light);
     font-size: clamp(0.5rem, 1.5vw, 1rem);
-}
+} */
 
-@media (hover: hover) and (pointer: fine) {
+/* @media (hover: hover) and (pointer: fine) {
     
     .icon-list-item:hover .footer-icon-svg path {
         stroke: var(--color-shadows);
@@ -766,7 +766,7 @@ h4 {
     .footer__link:hover {
         color: var(--color-shadows);
     }
-}
+} */
 
 @media (min-width: 360px) {
      

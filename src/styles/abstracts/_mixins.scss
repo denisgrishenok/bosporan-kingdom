@@ -45,13 +45,14 @@
         &:hover {
             color: $hover-color;
             border-color: $hover-color;
-            
+            stroke: $hover-color;
         }
     }
 
     &:active {
         color: $hover-color;
         border-color: $hover-color;
+        
         
     }
 

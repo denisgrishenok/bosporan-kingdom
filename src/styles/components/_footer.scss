@@ -1,0 +1,54 @@
+@use '../abstracts/mixins' as *;
+@use '../abstracts/functions' as *;
+
+.footer {
+    padding: var(--container-padding-x);
+    background-color: var(--color-footer);
+    margin-top: calc(var(--container-padding-x) * 2);
+
+    &__container {
+        display: grid;
+        gap: rem(16);
+        width: 100%;
+        max-width: var(--container-width);
+        height: auto;
+        margin: auto;
+    }
+
+    &--text {
+        color: var(--color-light);
+        font-family: var(--font-family-support);
+        @include fluid-text(10, 15);
+         
+    }
+
+    &__icon-list {
+        display: flex;
+        gap: rem(32); 
+    }
+
+    &__link {
+        color: var(--color-light);
+        @include fluid-text(8, 16);
+        @include interactive(var(--color-shadows));
+        
+    }
+
+    &__logo {
+        display: inline-block;
+        @include interactive(var(--color-shadows)); 
+    }
+
+    .logo {
+        @include fluid-space(height, 16, 20);
+    }
+
+    .icon {
+        @include fluid-space(height, 32, 48);
+        stroke: var(--color-light);
+        @include interactive(var(--color-shadows));  
+    }
+
+    
+
+}
