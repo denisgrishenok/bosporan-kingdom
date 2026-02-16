@@ -59,23 +59,28 @@
         @include interactive(var(--color-link-hover));       
     }
 
+    &__menu-item--dropdown {
+        position: relative;
+    }
+
     &__dropdown {
         position: absolute;
-        top: 100%;
         right: 0;
+        top: 100%;
         opacity: 0;
         visibility: hidden;
         pointer-events: none;
-        transform: translateY(rem(8));
         transition: opacity 0.2s ease, transform 0.2s ease;
         z-index: 20;
+
+        @include fluid-space (width, 320, 600);
 
 
             &.is-open {
                 opacity: 1;
                 visibility: visible;
                 pointer-events: auto;
-                transform: translateY(rem(35));
+                transform: translateY(rem(30));
             }
         }
 

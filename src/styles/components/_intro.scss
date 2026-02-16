@@ -18,6 +18,8 @@
     background-repeat: no-repeat;
     padding-bottom: rem(32);
 
+    scroll-margin-top: var(--header-height);
+
     &__container {
         display: flex;
         margin-inline: auto;
