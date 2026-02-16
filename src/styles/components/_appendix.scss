@@ -1,7 +1,8 @@
 @use '../abstracts/functions' as *;
 @use '../abstracts/mixins' as *;
 
-.appendix__title::before {
+.appendix {
+    &__title::before {
     background-image: url(@assets/icons/icon-appendix-text.svg);
 
     content: "";
@@ -12,5 +13,86 @@
     background-size: contain;
     background-position: center;
 
-    @include fluid-space(width, 55, 80);
+    @include fluid-space(width, 55, 80);    
+    }
+
+    &__rulers {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+}
+        
+.rulers {
+    &__table {
+        min-width: rem(1200);
+        border-collapse: collapse;
+          
+        td {
+            width: rem(240);
+            height: rem(24); 
+        }
+    }
+
+    &__title {
+        text-align: left;
+    }
+
+    &__text {
+        text-align: center; 
+    }
+        
+}
+
+.arch {
+    color: var(--color-link-hover);
+    border: rem(1) solid var(--color-link-hover);
+}
+
+.spart {
+    color: var(--color-rulers-spart);
+    border: rem(1) solid var(--color-rulers-spart);
+}
+
+.mitr {
+    color: var(--color-rulers-mitr);
+    border: rem(1) solid var(--color-rulers-mitr);
+}
+
+.not-dinast {
+    border: rem(1) solid var(--color-text);
+}
+
+.tib {
+    color: var(--color-rulers-tib);
+    border: rem(1) solid var(--color-rulers-tib);
+}
+
+.cell__border {
+    &--spart {
+        border-right: rem(1) solid var(--color-rulers-spart);
+    }
+
+    &--spart-bottom {
+        border-bottom: rem(1) solid var(--color-rulers-spart);
+    }
+
+    &--mitr {
+        border-right: rem(1) solid var(--color-rulers-mitr);
+    }
+
+    &--not-dinast {
+        border-right: rem(1) solid var(--color-text);
+    }
+
+    &--not-dinast-bottom {
+        border-bottom: rem(1) solid var(--color-text);
+    }
+
+    &--tib {
+        border-right: rem(1) solid var(--color-rulers-tib);
+    }
+
+    &--tib-bottom {
+        border-bottom: rem(1) solid var(--color-rulers-tib);
+    }
 }

@@ -634,7 +634,7 @@ h4 {
 /* .appendix__title::before {
     background-image: url(./Icons/icon-appendix-text.svg);
     width: clamp(4rem, 7vw, 5.1rem);
-} */
+}
 
 .appendix__rulers {
     overflow-x: auto;
@@ -657,9 +657,9 @@ h4 {
 
 .rulers__text {
     text-align: center;
-}
+} */
 
-.arch {
+/* .arch {
     color: var(--color-link-hover);
     border: 1px solid var(--color-link-hover);
 }
@@ -667,49 +667,49 @@ h4 {
 .spart {
     color: var(--color-rulers-spart);
     border: 1px solid var(--color-rulers-spart);
-}
+} */
 
-.cell__border--spart {
+/* .cell__border--spart {
     border-right: 1px solid var(--color-rulers-spart);
 }
 
 .cell__border--spart-bottom {
     border-bottom: 1px solid var(--color-rulers-spart);
-}
+} */
 
-.mitr {
+/* .mitr {
     color: var(--color-rulers-mitr);
     border: 1px solid var(--color-rulers-mitr);
-}
+} */
 
-.cell__border--mitr {
+/* .cell__border--mitr {
     border-right: 1px solid var(--color-rulers-mitr);
-}
+} */
 
-.not-dinast {
+/* .not-dinast {
     border: 1px solid var(--color-text);
-}
+} */
 
-.cell__border--not-dinast {
+/* .cell__border--not-dinast {
     border-right: 1px solid var(--color-text);
 }
 
 .cell__border--not-dinast-bottom {
     border-bottom: 1px solid var(--color-text);
-}
+} */
 
-.tib {
+/* .tib {
     color: var(--color-rulers-tib);
     border: 1px solid var(--color-rulers-tib);
-}
+} */
 
-.cell__border--tib {
+/* .cell__border--tib {
     border-right: 1px solid var(--color-rulers-tib);
 }
 
 .cell__border--tib-bottom {
     border-bottom: 1px solid var(--color-rulers-tib);
-}
+} */
 
 .footer {
     padding: var(--container-padding-x);
