@@ -18,19 +18,37 @@
     gap: rem(24);
 
     @include interactive-box-shadow(var(--color-link-hover));
+
+    @include adaptive(tablet) {
+        flex-direction: row;
+    }
+
+    @include adaptive(laptop) {
+        flex-direction: column;
+    }
 }
 
 .large-picture--container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    
+    @include flex-center;
+    flex-direction: row;
+    flex-wrap: wrap;
+    
     border: transparent;
     border-radius: var(--border-radius);
+    
     box-shadow: 0 0 rem(3) var(--color-shadows);
+    
     padding: rem(24);
     gap: rem(24);
 
     @include interactive-box-shadow(var(--color-link-hover));
+
+    @include adaptive(laptop) {
+        display: grid;
+        justify-content:space-around;
+        justify-items: center;
+    }
 }
 
 .double-picture--container {
@@ -65,13 +83,14 @@
 .picture--description {
     font-family: var(--font-family-support);
     color: var(--color-footer);
-    font-size: 0.9rem;
-    
-}
-
-.picture--description {
-    font-family: var(--font-family-support);
-    color: var(--color-footer);
     font-size: rem(14);
+
+    @include adaptive(tablet) {
+        padding-left: rem(24);
+    }
+
+    @include adaptive(laptop) {
+        padding-left: 0;
+    }
     
 }

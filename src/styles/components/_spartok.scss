@@ -1,8 +1,90 @@
 @use '../abstracts/functions' as *;
 @use '../abstracts/mixins' as *;
 
-.spartok__title::before {
+.spartok {
+
+    &__title::before {
     background-image: url(@assets/icons/icon-Spartokids-text.svg);
 
     @include section-title;
+
+    }
+
+    &__large-picture-container {
+        @include adaptive(laptop) {
+            grid-template-areas: 
+            "large-picture-1 large-picture-3 large-picture-2"
+            "large-picture-1 large-picture-4 large-picture-description";  
+        }
+    }
+
+    &__large-picture-container-2 {
+        @include adaptive(laptop) {
+            grid-template-areas: 
+            "large-picture-1 large-picture-1 large-picture-description"
+            "large-picture-2 large-picture-3 large-picture-4"; 
+        }
+    }
 }
+
+.kul-oba-1 {
+    grid-area: large-picture-1;
+}
+
+.kul-oba-2 {
+    grid-area: large-picture-2;
+
+}
+
+.kul-oba-3 {
+    grid-area: large-picture-3;
+}
+
+.kul-oba-4 {
+    grid-area: large-picture-4;
+}
+
+.kul-oba-description {
+    grid-area: large-picture-description;
+}
+
+.bliz-1 {
+    grid-area: large-picture-1;
+}
+
+.bliz-2 {
+    grid-area: large-picture-2;
+}
+
+.bliz-3 {
+    grid-area: large-picture-3;
+}
+
+.bliz-4 {
+    grid-area: large-picture-4;
+}
+
+.bliz-description {
+    grid-area: large-picture-description;
+}
+
+.vasy-1 {
+    grid-area: large-picture-1;
+}
+
+.vasy-2 {
+    grid-area: large-picture-2;
+}
+
+.vasy-3 {
+    grid-area: large-picture-3;
+}
+
+.vasy-4 {
+    grid-area: large-picture-4;
+}
+
+.vasy-description {
+    grid-area: large-picture-description;
+}
+

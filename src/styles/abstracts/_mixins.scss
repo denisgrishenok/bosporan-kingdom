@@ -87,3 +87,23 @@
 
     @include fluid-space(width, 45, 64);
 }
+
+@mixin adaptive($breakpoint) {
+    @if $breakpoint == tablet {
+        @media (min-width: rem(700)) {
+            @content;
+        } 
+    }
+
+    @if $breakpoint == laptop {
+        @media (min-width: rem(900)) {
+            @content;
+        } 
+    }
+
+    @if $breakpoint == desktop {
+        @media (min-width: rem(1000)) {
+            @content;
+        } 
+    }
+}

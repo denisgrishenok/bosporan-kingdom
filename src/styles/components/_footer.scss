@@ -8,11 +8,16 @@
 
     &__container {
         display: grid;
+        grid-template-columns: repeat(2, 1fr); //min-width 450 
         gap: rem(16);
         width: 100%;
         max-width: var(--container-width);
         height: auto;
         margin: auto;
+
+        @include adaptive(tablet) {
+            grid-template-columns: repeat(3, 1fr);
+        }
     }
 
     &--text {
@@ -37,6 +42,24 @@
     &__logo {
         display: inline-block;
         @include interactive(var(--color-shadows)); 
+    }
+
+    &__column-center {
+        justify-items: right; //min-width 450 
+
+        @include adaptive(tablet) {
+            justify-items: center;
+        }
+    }
+
+    &__out-link {
+        @include adaptive(tablet) {
+            display: flex;
+            flex-direction: column;
+            align-items: end;
+            justify-content: space-between;
+            height: 100%;  
+        }
     }
 
     .logo {

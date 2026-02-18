@@ -8,9 +8,9 @@ export function initSmartHeader() {
     let hideTimeout = null;
     let isAnchorScrolling = false;
 
-    const HIDE_OFFSET = 600;
+    const HIDE_OFFSET = 1000;
     const SHOW_OFFSET = 2000;
-    const TOP_OFFSET = 100;
+    const TOP_OFFSET = 1000;
     const TOP_HOVER_ZONE = 40;
     const HIDE_DELAY = 1000;
 
