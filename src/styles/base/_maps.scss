@@ -4,17 +4,19 @@
 .map--container {
     display: flex;
     justify-content: center;
+    
     border: transparent;
     border-radius: var(--border-radius);
     box-shadow: 0 0 rem(3) var(--color-shadows);
-    padding: var(--container-padding-x);
-    margin-bottom: rem(32);
-
     @include interactive-box-shadow(var(--color-link-hover));
+        
+    @include fluid-space(padding-block, 10, 20);
+    margin-bottom: rem(32);
+   
 }
 
 .map--img {
-    @include fluid-space(width, 288, 1168);
+    @include fluid-space(width, 290, 1168);
     height: auto;
     cursor: pointer;
 }

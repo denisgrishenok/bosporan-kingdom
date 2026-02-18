@@ -11,12 +11,14 @@
 .picture--container-inner {
     @include flex-center;
     flex-direction: column;
+    
     border: transparent;
     border-radius: var(--border-radius);
     box-shadow: 0 0 rem(3) var(--color-shadows);
-    padding: rem(24);
-    gap: rem(24);
-
+    
+    @include fluid-space(padding, 16, 24);
+    @include fluid-space(gap, 16, 24);
+   
     @include interactive-box-shadow(var(--color-link-hover));
 
     @include adaptive(tablet) {

@@ -31,24 +31,34 @@
 
     &__text {
         @include adaptive(tablet) {
-            max-width: 85%;
+            max-width: 80%;
         }
 
           @include adaptive(laptop) {
-            max-width: 70%;
+            max-width: 60%;
         }
     }
 
     &__nav {
+
+        @include adaptive(tablet) {
+            max-width: 95%;
+        }
         
         @include adaptive(laptop) {
-            max-width: 85%;
+            max-width: 75%;
         }
+    }
+
+    &__list {
+        @include fluid-space (margin-top, 1, 16);
     }
 
     &__item {
         &:not(:last-child) {
-        margin-bottom: rem(16);
+        
+        @include fluid-space (margin-bottom, 10, 16);
+            
         }
 
     }
@@ -56,11 +66,14 @@
     &__link {
         position: relative;
         display: grid;
-        height: rem(88);
         grid-template-columns: repeat(1, 1fr);
+        
+        @include fluid-space (height, 74, 88);
+               
         border: transparent;
         border-radius: var(--border-radius);
         box-shadow: 0 0 rem(3) var(--color-shadows);
+        
         user-select: none;
         background-color: var(--color-light);
         
@@ -82,15 +95,20 @@
         display: grid;
         grid-template-columns: 1fr 2fr;
         align-items: center;
-        padding-inline: rem(32);
+        @include fluid-space (padding-inline, 20, 32);
+        
+        p {
+            margin: 0;
+        }
 
         
     }
-    
-    
+
+      
     &__item-description {
         padding-left: 0;
-        padding-right: rem(32);
+        @include fluid-space (padding-right, 20, 32);
+        
         display: none;
 
         @include adaptive(tablet) {
@@ -99,7 +117,7 @@
     }
 
     .icon {
-        height: rem(48);
+        @include fluid-space (height, 38, 48);
         width: auto;
     }
 
