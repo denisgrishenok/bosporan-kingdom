@@ -57,7 +57,7 @@
     &__item {
         &:not(:last-child) {
         
-        @include fluid-space (margin-bottom, 10, 16);
+        @include fluid-space (margin-bottom, 8, 16);
             
         }
 
@@ -68,7 +68,7 @@
         display: grid;
         grid-template-columns: repeat(1, 1fr);
         
-        @include fluid-space (height, 74, 88);
+        @include fluid-space (height, 70, 88);
                
         border: transparent;
         border-radius: var(--border-radius);

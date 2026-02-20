@@ -78,7 +78,7 @@
         position: absolute;
         
         right: 0;
-        top: 100%;
+        top: calc(100% + rem(8));
         
         
         opacity: 0;
@@ -97,8 +97,10 @@
         }      
 
         .intro__list {
-            max-height: 100vh;
+            max-height: calc(100dvh - var(--header-height) - rem(16));
             overflow-y: auto;
+            padding-bottom: rem(12);
+            -webkit-overflow-scrolling: touch;
         }
   
 
@@ -110,11 +112,7 @@
 
         .intro__item-container {
             grid-template-columns: 1fr 2.5fr;
-
-            // @include adaptive(tablet) {
-            //     grid-template-columns: 1fr 2.5fr;
-            // }
-            
+           
             @include adaptive(laptop) {
                 grid-template-columns: 1fr 2fr; 
             }
@@ -141,7 +139,7 @@
             opacity: 1;
             visibility: visible;
             pointer-events: auto;
-            transform: translateY(rem(30));
+            transform: translateY(rem(8));
         }
     }
 
