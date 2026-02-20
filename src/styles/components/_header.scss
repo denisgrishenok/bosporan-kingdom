@@ -89,9 +89,12 @@
         z-index: 20;
         transform: translateY(0);
 
-              
+        width: calc(100vw - var(--container-padding-x) * 2);
+        
 
-        @include fluid-space (width, 300, 600);
+        @include adaptive(mobile-wide) {
+            @include fluid-space (width, 380, 600);
+        }      
 
         .intro__list {
             max-height: 100vh;
@@ -106,7 +109,11 @@
         }
 
         .intro__item-container {
-            grid-template-columns: 1fr 3fr;
+            grid-template-columns: 1fr 2.5fr;
+
+            // @include adaptive(tablet) {
+            //     grid-template-columns: 1fr 2.5fr;
+            // }
             
             @include adaptive(laptop) {
                 grid-template-columns: 1fr 2fr; 
@@ -120,7 +127,7 @@
 
         .intro__period {
             display: none;
-            @include adaptive (laptop) {
+            @include adaptive(tablet) {
                 display: block;
             }
         }

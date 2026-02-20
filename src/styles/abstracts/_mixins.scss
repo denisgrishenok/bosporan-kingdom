@@ -89,6 +89,13 @@
 }
 
 @mixin adaptive($breakpoint) {
+    
+    @if $breakpoint == mobile-wide {
+        @media (min-width: rem(500)) {
+            @content;
+        }
+    }
+    
     @if $breakpoint == tablet {
         @media (min-width: rem(700)) {
             @content;
