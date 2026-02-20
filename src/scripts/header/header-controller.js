@@ -3,17 +3,16 @@ export function initSmartHeader() {
     if (!header) return;
 
     let lastScroll = window.scrollY;
-    let accumulatedDownScroll = 0;
-    let accumulatedUpScroll = 0;
-    let hideTimeout = null;
+    let lastDirection = null;
+    let accumulatedScroll = 0;
     let isAnchorScrolling = false;
 
-    const HIDE_OFFSET = 1000;
-    const SHOW_OFFSET = 2000;
-    const TOP_OFFSET = 1000;
-    const TOP_HOVER_ZONE = 40;
-    const HIDE_DELAY = 1000;
 
+    const TOP_OFFSET = 30;
+    const TOP_HOVER_ZONE = 30;
+    const HIDE_THRESHOLD = 1000;
+    const SHOW_THRESHOLD = 1500; 
+    
     function showHeader() {
         header.classList.remove('is-hidden');
     }
@@ -22,57 +21,58 @@ export function initSmartHeader() {
         header.classList.add('is-hidden');
     }
 
-    function clearHideTimer() {
-        if (hideTimeout) {
-            clearTimeout(hideTimeout);
-            hideTimeout = null;
-        }
-    }
-
     function handleScroll() {
         if (isAnchorScrolling) return;
 
+        const isHidden = header.classList.contains('is-hidden');
         const currentScroll = window.scrollY;
-        const deltaY = currentScroll - lastScroll;
-        const direction = deltaY > 0 ? 'down' : deltaY < 0 ? 'up' : null;
 
-        if (!direction) return;
-
+        if (document.body.classList.contains('menu-open')) {
+                
+            showHeader();
+            lastScroll = currentScroll;
+            return;
+        }
+        
         if (currentScroll <= TOP_OFFSET) {
             showHeader();
-            accumulatedDownScroll = 0;
-            accumulatedUpScroll = 0;
-            clearHideTimer();
+            lastScroll = currentScroll;
+            return;
+        }        
+
+        const deltaY = currentScroll - lastScroll;       
+        
+        if (deltaY === 0) {
             lastScroll = currentScroll;
             return;
         }
 
-        if (direction === 'down') {
-            accumulatedDownScroll += deltaY;
-            accumulatedUpScroll = 0;
+        const direction = deltaY > 0 ? 'down' : 'up';
 
-            if (accumulatedDownScroll > HIDE_OFFSET) {
-                if (!hideTimeout) {
-                    hideTimeout = setTimeout(() => {
-                        hideHeader();
-                        hideTimeout = null;
-                    }, HIDE_DELAY);
-                }
+        if (direction !== lastDirection) {
+            accumulatedScroll = 0;
+            lastDirection = direction;
+        }
+        
+        if (direction === 'down' && !isHidden) {
+            accumulatedScroll += Math.abs(deltaY); 
+        }
+
+         if (direction === 'up' && isHidden) {
+            accumulatedScroll += Math.abs(deltaY); 
+        }
+
+        if (direction === 'down' && accumulatedScroll >= HIDE_THRESHOLD) {
+            if (!isHidden) {
+            hideHeader();
+            accumulatedScroll = 0;
             }
         }
 
-        if (direction === 'up') {
-            accumulatedUpScroll += Math.abs(deltaY);
-            accumulatedDownScroll = 0;
-
-            clearHideTimer();
-
-            if (
-                header.classList.contains('is-hidden') &&
-                accumulatedUpScroll > SHOW_OFFSET
-            ) {
+        if (direction === 'up' && accumulatedScroll >= SHOW_THRESHOLD) {
+            if (isHidden && currentScroll > TOP_OFFSET) {
                 showHeader();
-                accumulatedUpScroll = 0;
+                accumulatedScroll = 0; 
             }
         }
 

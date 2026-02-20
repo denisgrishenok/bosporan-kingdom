@@ -9,7 +9,7 @@
     z-index: 20;
     background: var(--color-light);
     height: var(--header-height);
-    box-shadow: 0 0 rem(18) var(--color-shadows);
+    box-shadow: 0 0 rem(10) var(--color-shadows);
     padding-inline: var(--container-padding-x);
     transform: translateY(0);
     transition: transform 0.5s ease;
@@ -17,7 +17,7 @@
 
     &.is-hidden {
         transform: translateY(-100%);
-        box-shadow: 0 0 rem(0) var(--color-shadows);
+        
     }
 
     &__container {

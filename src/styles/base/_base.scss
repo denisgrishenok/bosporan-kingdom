@@ -110,7 +110,7 @@ a {
 }
 
 .text-area {
-    @include fluid-space(padding-inline, 1, 120);
+    @include fluid-space(padding-inline, 1, 100);
 
     @include adaptive(laptop) {
         grid-area: text-area;
