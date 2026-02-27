@@ -16,26 +16,24 @@
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    padding-bottom: rem(32);
 
     scroll-margin-top: var(--header-height);
 
     &__container {
-        display: flex;
-        margin-inline: auto;
-        flex-direction: column;
-        max-width: var(--container-width);
-        padding-inline: var(--container-padding-x);
+        
+        justify-content:space-evenly;
+        min-height: calc(100vh - var(--header-height));
+        min-height: calc(100dvh - var(--header-height));
 
     }
 
     &__text {
         @include adaptive(tablet) {
-            max-width: 80%;
+            max-width: 95%;
         }
 
           @include adaptive(laptop) {
-            max-width: 60%;
+            max-width: 75%;
         }
     }
 
@@ -48,10 +46,6 @@
         @include adaptive(laptop) {
             max-width: 75%;
         }
-    }
-
-    &__list {
-        @include fluid-space (margin-top, 1, 16);
     }
 
     &__item {

@@ -78,7 +78,7 @@
         position: absolute;
         
         right: 0;
-        top: calc(100% + rem(8));
+        top: 100%;
         
         
         opacity: 0;
@@ -99,15 +99,21 @@
         .intro__list {
             max-height: calc(100dvh - var(--header-height) - rem(16));
             overflow-y: auto;
-            padding-bottom: rem(12);
+          
+            @include fluid-space (margin-top, 16, 28);
             -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+            &::-webkit-scrollbar {
+                display: none;
+            }
         }
   
 
         .intro__link {
             display: grid;
             grid-template-columns: repeat(1, 1fr);
-            @include fluid-space (height, 60, 80);
+            @include fluid-space (height, 60, 77);
         }
 
         .intro__item-container {
@@ -139,8 +145,11 @@
             opacity: 1;
             visibility: visible;
             pointer-events: auto;
-            transform: translateY(rem(8));
+
         }
+
+        
+
     }
 
     .icon {
@@ -149,6 +158,8 @@
 
        
 }
+
+
 
 
 

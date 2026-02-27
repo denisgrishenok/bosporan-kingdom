@@ -6,9 +6,9 @@ h1, h2, h3 {
 }
 
 .title--h1 {
-    @include fluid-text(24, 32);
-    @include fluid-space(margin-top, 20, 32);
-    @include fluid-space(margin-bottom, 5, 10);
+    @include fluid-text(18, 28);
+    @include fluid-space(margin-top, 10, 20);
+    @include fluid-space(margin-bottom, 5, 7);
     
 }
 
