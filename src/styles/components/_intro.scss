@@ -2,6 +2,7 @@
 @use '../abstracts/mixins' as *;
 
 .intro {
+        
     width: 100vw;
     margin-inline: calc(50% - 50vw);
     min-height: calc(100vh - var(--header-height));
@@ -13,11 +14,13 @@
         url("@assets/images/intro-bg_w.webp") type("image/webp")
     );
     
+
     background-size: cover;
     background-position: center;
-    background-repeat: no-repeat;
+    background-repeat: no-repeat;   
 
     scroll-margin-top: var(--header-height);
+
 
     &__container {
         
@@ -25,15 +28,18 @@
         min-height: calc(100vh - var(--header-height));
         min-height: calc(100dvh - var(--header-height));
 
+         @include fluid-space (padding-bottom, 10, 20);
+
     }
 
-    &__text {
+    &__text {     
+
         @include adaptive(tablet) {
-            max-width: 95%;
+            max-width: 85%;
         }
 
           @include adaptive(laptop) {
-            max-width: 75%;
+            max-width: 65%;
         }
     }
 
@@ -114,5 +120,29 @@
         @include fluid-space (height, 38, 48);
         width: auto;
     }
+
+}
+
+.intro > * {
+    position: relative;
+    z-index: 2;
+}
+
+.intro::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+
+    background: linear-gradient(
+        to bottom, 
+        
+        rgba(255, 255, 255, 0.6) 0%,
+        rgba(248, 243, 235, 0.3) 50%,
+        rgba(243, 232, 215, 0.0) 100%
+
+    ); 
+    
+    pointer-events: none;
+    z-index: 1;
 
 }
