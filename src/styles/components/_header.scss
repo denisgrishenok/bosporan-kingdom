@@ -99,6 +99,7 @@
         .intro__list {
             max-height: calc(100dvh - var(--header-height) - rem(16));
             overflow-y: auto;
+            padding: rem(2);
           
             @include fluid-space (margin-top, 16, 28);
             -webkit-overflow-scrolling: touch;
