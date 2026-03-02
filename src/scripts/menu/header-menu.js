@@ -94,6 +94,7 @@ export function initHeaderMenu() {
         overlay.classList.add('is-active');
         document.body.classList.add('menu-open');
         buttonMenu.setAttribute('aria-expanded', 'true');
+        buttonMenu.classList.add('is-open');
 
 
 
@@ -106,6 +107,7 @@ export function initHeaderMenu() {
         overlay.classList.remove('is-active');
         document.body.classList.remove('menu-open');
         buttonMenu.setAttribute('aria-expanded', 'false');
+        buttonMenu.classList.remove('is-open');
 
         if (returnFocus) {
             buttonMenu.focus();

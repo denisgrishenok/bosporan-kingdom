@@ -54,11 +54,15 @@
     }
 
     &__button {
+                
         height: calc(var(--header-height) / 1.8);
         color: var(--color-link);
-        background-color: transparent;
-        border: var(--border);
+        background-color: var(--color-light);
+        border: rem(0) solid var(--color-light);
         border-radius: var(--border-radius);
+
+        box-shadow: inset rem(0) rem(0) rem(4) var(--color-link);
+
         font-family: var(--font-family-support);
         font-weight: 400;
         text-transform: none;
@@ -66,8 +70,16 @@
         @include fluid-text(12, 16);
         @include fluid-space(letter-spacing, 3, 5);
         @include fluid-space(padding-inline, 8, 32);            
-        @include interactive(var(--color-link-hover));       
+        @include interactive(var(--color-link-hover));
+        @include interactive-box-shadow(var(--color-link-hover));
+        
+        &.is-open {
+            box-shadow: 0 0 rem(4) var(--color-link-hover);
+            color: var(--color-link-hover);
+        }
+        
     }
+
 
     &__menu-item--dropdown {
         position: relative;
