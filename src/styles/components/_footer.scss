@@ -3,69 +3,92 @@
 
 .footer {
     padding-inline: var(--container-padding-x);
-    padding-top: calc(var(--container-padding-x) / 1.5);
+    padding-top: calc(var(--container-padding-x) / 1.2);
     padding-bottom: calc(var(--container-padding-x) / 1.5);
+
     background-color: var(--color-footer);
     margin-top: calc(var(--container-padding-x) * 2);
 
+
     &__container {
         display: grid;
-        grid-template-columns: repeat(2, 1fr); //min-width 450 
-        gap: rem(16);
+        grid-template-columns: repeat(2, 1fr); 
+        gap: rem(5);        
         width: 100%;
         max-width: var(--container-width);
         height: auto;
         margin: auto;
 
-        @include adaptive(tablet) {
-            grid-template-columns: repeat(3, 1fr);
+        @include adaptive(mobile-wide) {
+            display: flex;
+            justify-content: space-between;
         }
     }
 
-    &--text {
-        color: var(--color-light);
-        font-family: var(--font-family-support);
-        @include fluid-text(10, 12);
-         
+    &__logo-list {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        gap: rem(16);
+
+        li span {
+            display: block;
+        }
     }
 
     &__icon-list {
+        
         display: flex;
-        gap: rem(32); 
+        justify-content: end;
+        @include fluid-space(gap, 20, 60);
+        
     }
 
+    &__out-link {
+        
+        grid-column: 1 / -1;
+        display: flex;
+        justify-content: space-between;
+
+        @include adaptive(mobile-wide) {
+            display: flex;
+            flex-direction: column;
+            margin-top: rem(-5);
+        }
+
+        li a {
+            display: block;
+            
+        }
+
+        @include adaptive(mobile-wide) {
+            align-items: end;
+        }
+        
+    }
+    
     &__link {
         color: var(--color-light);
-        @include fluid-text(10, 14);
+        @include fluid-text(9, 14);
         @include interactive(var(--color-shadows));
         
     }
 
     &__logo {
-        display: inline-block;
+        
         @include interactive(var(--color-shadows)); 
     }
 
-    &__column-center {
-        justify-items: right; //min-width 450 
-
-        @include adaptive(tablet) {
-            justify-items: center;
-        }
-    }
-
-    &__out-link {
-        @include adaptive(tablet) {
-            display: flex;
-            flex-direction: column;
-            align-items: end;
-            justify-content: space-between;
-            height: 100%;  
-        }
+    
+    &--text {
+        color: var(--color-light);
+        font-family: var(--font-family-support);
+        @include fluid-text(8, 12);
+         
     }
 
     .logo {
-        @include fluid-space(height, 16, 20);
+        @include fluid-space(height, 14, 20);
     }
 
     .icon {
