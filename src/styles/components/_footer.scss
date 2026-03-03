@@ -2,7 +2,9 @@
 @use '../abstracts/functions' as *;
 
 .footer {
-    padding: var(--container-padding-x);
+    padding-inline: var(--container-padding-x);
+    padding-top: calc(var(--container-padding-x) / 1.5);
+    padding-bottom: calc(var(--container-padding-x) / 1.5);
     background-color: var(--color-footer);
     margin-top: calc(var(--container-padding-x) * 2);
 
@@ -23,7 +25,7 @@
     &--text {
         color: var(--color-light);
         font-family: var(--font-family-support);
-        @include fluid-text(10, 15);
+        @include fluid-text(10, 12);
          
     }
 
@@ -34,7 +36,7 @@
 
     &__link {
         color: var(--color-light);
-        @include fluid-text(8, 16);
+        @include fluid-text(10, 14);
         @include interactive(var(--color-shadows));
         
     }
@@ -67,7 +69,7 @@
     }
 
     .icon {
-        @include fluid-space(height, 32, 48);
+        @include fluid-space(height, 26, 32);
         stroke: var(--color-light);
         @include interactive(var(--color-shadows));  
     }
