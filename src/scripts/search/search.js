@@ -4,16 +4,26 @@ export function initSearch() {
 
     if (!mainSource) return;
 
-    const sections = [...mainSource.querySelectorAll('section[id]')];
+    const normalizeText = function(text) {
+        return text
+        .toLowerCase()
+        .replace(/ё/g, 'е')
+        .replace(/ё/g, 'е')
+        .replace(/\s+/g, ' ')
+        .trim();
+    }
+
+    const sections = [...mainSource.querySelectorAll('section[id]')].filter(section => section.id !== 'section-intro');
     const searchSource = sections.map((section) => { 
         let titleElement = section.querySelector('h1, h2, h3, h4');
         let paragraphs = [...section.querySelectorAll('p')];
+        let title = titleElement ? titleElement.textContent : '';
+        let text = paragraphs.map(p => p.textContent).join(' ');
         return {
             id: section.id,
-            title: titleElement ? titleElement.textContent : '',
-            text: paragraphs.map(p => p.textContent).join(' '),
+            title,
+            text,
+            searchText: normalizeText(`${title} ${text}`),
         };
-    })
-
-    console.log(searchSource.slice(0, 3));
+    }).filter(item => item.id.trim().length > 0 && item.searchText.trim().length > 0)
 }
