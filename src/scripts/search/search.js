@@ -8,7 +8,6 @@ export function initSearch() {
         return text
         .toLowerCase()
         .replace(/ё/g, 'е')
-        .replace(/ё/g, 'е')
         .replace(/\s+/g, ' ')
         .trim();
     }
@@ -17,8 +16,8 @@ export function initSearch() {
     const searchSource = sections.map((section) => { 
         let titleElement = section.querySelector('h1, h2, h3, h4');
         let paragraphs = [...section.querySelectorAll('p')];
-        let title = titleElement ? titleElement.textContent : '';
-        let text = paragraphs.map(p => p.textContent).join(' ');
+        let title = titleElement ? normalizeText(titleElement.textContent) : '';
+        let text = normalizeText(paragraphs.map(p => p.textContent).join(' '));
         return {
             id: section.id,
             title,
