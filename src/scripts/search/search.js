@@ -5,14 +5,14 @@ export function initSearch() {
     const searchButton = document.querySelector('.search__submit');
     const overlay = document.querySelector('.header__overlay');
     const searchInput = document.querySelector('.search__input');
-    const searchList = document.querySelector('.search__list');
-    
+    const searchList = document.querySelector('.search__list'); 
     
     if (!mainSource || !searchResult || !searchButton || !overlay || !searchInput || !searchList) return;
 
     const normalizeText = function(text) {
         if (text == null) {
-            return "";}
+            return "";
+        }
         else return String(text)
         .toLowerCase()
         .replace(/ё/g, 'е')
@@ -20,17 +20,29 @@ export function initSearch() {
         .trim();
     }
 
+    const normalizeForIndex = function(text) {
+        if (text == null) {
+            return "";
+        }
+        else return String(text)
+        .toLowerCase()
+        .replace(/ё/g, 'е')
+    }
+
     const sections = [...mainSource.querySelectorAll('section[id]')].filter(section => section.id !== 'section-intro');
     const searchSource = sections.map((section) => { 
         let titleElement = section.querySelector('h1, h2, h3, h4');
         let paragraphs = [...section.querySelectorAll('p')];
         let title = titleElement ? normalizeText(titleElement.textContent) : '';
-        let text = normalizeText(paragraphs.map(p => p.textContent).join(' '));
+        let text = paragraphs.map(p => p.textContent).join(' ');
+        let indexText = normalizeForIndex(text);
+        
         return {
             id: section.id,
             title,
             text,
-            searchText: normalizeText(`${title} ${text}`),
+            searchText: normalizeText(`${title} ${indexText}`),
+            indexText,
         };
     }).filter(item => item.id.trim().length > 0 && item.searchText.trim().length > 0)
 
@@ -59,21 +71,23 @@ export function initSearch() {
     let debounceId = null;
 
     const searchFilter = (input, { immediate }) => {
-        let query = normalizeText(input);
+        let queryRaw = input;
+        let queryIndex = normalizeForIndex(queryRaw);
+
 
         if (debounceId !== null) clearTimeout(debounceId);
         
-        if (query === "") {
+        if (normalizeText(queryRaw).length < 3) {
             searchList.innerHTML = '';
             closeSearchResult();
             return;
         }
 
-        const searchRender = (query, { showMessages, openPanel }) => {
+        const searchRender = (queryIndex, { showMessages, openPanel }) => {
             
             searchList.innerHTML = '';
 
-            let results = searchSource.filter(item => item.searchText.includes(query));
+            let results = searchSource.filter(item => item.indexText.includes(queryIndex));
 
             if (results.length === 0) {
                 
@@ -96,26 +110,53 @@ export function initSearch() {
             
             if (results.length > 0) {
 
-                const searchResults = document.createElement('li');
-                const p = document.createElement('p');
-                p.textContent = results[0].title;
-                searchResults.append(p);
-                searchList.append(searchResults);
+                const item = results.slice(0, 5);
 
-                if (openPanel === true) openSearchResult();
+                item.forEach((item) => {
+
+                    const matchIndex = item.indexText.indexOf(queryIndex);
+
+                    if (matchIndex === -1) return;
+
+                    const start = Math.max(0, matchIndex - 60);
+                    const end = Math.min(item.text.length, matchIndex + queryIndex.length + 90);
+                    let snippet = item.text.slice(start, end);
+
+                    if (start > 0) snippet = '...' + snippet;
+                    if (end < item.text.length) snippet = snippet + '...';
+
+                    const searchResults = document.createElement('li');
+                    searchResults.classList.add('search__item');
+                    
+                    const p = document.createElement('p');
+                    p.classList.add('search__title');
+                    p.textContent = item.title;
+                    
+                    const pSnippet = document.createElement('p');
+                    pSnippet.classList.add('search__snippet');
+                    pSnippet.textContent = snippet;
+                    
+                    searchResults.append(p, pSnippet);
+                    searchList.append(searchResults);
+
+                    searchResults.addEventListener('click', () => closeSearchResult());
+
+                })               
+                
+                if (openPanel === true) openSearchResult();                
+                
             }
-
             
         }
 
         if (immediate === true) {
-            searchRender(query, { showMessages: true, openPanel: true });
+            searchRender(queryIndex, { showMessages: true, openPanel: true });
             return;
         } 
         
         if (immediate === false) {
             debounceId = setTimeout(() => 
-                searchRender(query, { showMessages: false, openPanel: true }), 1000);
+                searchRender(queryIndex, { showMessages: false, openPanel: true }), 250);
             return;
         }
 

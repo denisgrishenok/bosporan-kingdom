@@ -168,9 +168,20 @@
         }
 
         &__item {
-            color: var(--color-text);
+            font-family: var(--font-family-support);
+            font-size: rem(14);
+            
+        }
+
+        &__snippet {
             @include interactive(var(--color-link));
             cursor: pointer;
+
+        }
+
+        &__title {
+            font-family: var(--font-family-base);
+            font-size: rem(16);
         }
 
     }
