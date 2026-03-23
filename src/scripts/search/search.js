@@ -67,17 +67,80 @@ export function initSearch() {
         }
     })
 
+    const escapeRegExp = (s) => String(s).replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    const collectRanges = (text, tokens) => {
+            const ranges = [];
+
+            for (const token of tokens) {
+                const t = token.trim();
+                if (!t) continue;
+
+                const re = new RegExp(escapeRegExp(t), 'giu');
+                let m;
+                while ((m = re.exec(text)) !== null) {
+                    const start = m.index;
+                    const end = start + m[0].length;
+                    if (end > start) ranges.push({ start, end });
+                    if (m[0].length === 0) re.lastIndex++;
+                }
+            }
+
+            ranges.sort((a, b) => a.start - b.start || a.end - b.end);
+
+            const merged = [];
+            for (const r of ranges) {
+                const last = merged[merged.length - 1];
+                if (!last || r.start > last.end) merged.push({ ...r });
+                else last.end = Math.max(last.end, r.end);
+            }
+            return merged;
+        }
+
+    const renderHighlighted = (el, text, tokens) => {
+            el.textContent = '';
+            const ranges = collectRanges(text, tokens);
+            if (ranges.length === 0) {
+                el.textContent = text;
+                return;
+            }
+
+            const frag = document.createDocumentFragment();
+            let cursor = 0;
+
+            for (const { start, end } of ranges) {
+                if (start > cursor) frag.append(document.createTextNode(text.slice(cursor, start)));
+
+                const mark = document.createElement('mark');
+                mark.textContent = text.slice(start, end);
+                frag.append(mark);
+
+                cursor = end;
+            }
+
+            if (cursor < text.length) frag.append(document.createTextNode(text.slice(cursor)));
+            el.append(frag);
+        }
     
     let debounceId = null;
 
-    const searchFilter = (input, { immediate }) => {
-        let queryRaw = input;
-        let queryIndex = normalizeForIndex(queryRaw);
+    let lastQueryMeaningful = '';
 
+    const searchFilter = (input, { immediate }) => {
+        const queryRaw = input;
+        const meaningful = normalizeText(queryRaw);
+        const cleanedMeaningful = meaningful.replace(/[^\p{L}\p{N}\s]+/gu, ' ').replace(/\s+/g, ' ').trim();
+        const tokens = [...new Set(cleanedMeaningful.split(' ').filter((token) => token.length >= 3))];
+        const queryIndex = normalizeForIndex(meaningful);
+
+        if (meaningful === lastQueryMeaningful && immediate === false) {
+            return;
+        } else {
+            lastQueryMeaningful = meaningful;
+        }
 
         if (debounceId !== null) clearTimeout(debounceId);
         
-        if (normalizeText(queryRaw).length < 3) {
+        if (queryIndex.length < 3) {
             searchList.innerHTML = '';
             closeSearchResult();
             return;
@@ -87,7 +150,13 @@ export function initSearch() {
             
             searchList.innerHTML = '';
 
-            let results = searchSource.filter(item => item.indexText.includes(queryIndex));
+            if (tokens.length === 0) {
+                searchList.innerHTML = '';
+                closeSearchResult();
+                return;
+            }
+
+            let results = searchSource.filter(item => tokens.every(token => item.indexText.includes(token)));
 
             if (results.length === 0) {
                 
@@ -111,19 +180,25 @@ export function initSearch() {
             if (results.length > 0) {
 
                 const item = results.slice(0, 5);
+                const anchor = tokens.reduce((max, t) => (t.length > max.length ? t : max), tokens[0]);
 
                 item.forEach((item) => {
-
-                    const matchIndex = item.indexText.indexOf(queryIndex);
+                    const matchIndex = item.indexText.indexOf(anchor);
 
                     if (matchIndex === -1) return;
 
                     const start = Math.max(0, matchIndex - 60);
-                    const end = Math.min(item.text.length, matchIndex + queryIndex.length + 90);
+                    const end = Math.min(item.text.length, matchIndex + anchor.length + 90);
                     let snippet = item.text.slice(start, end);
-
-                    if (start > 0) snippet = '...' + snippet;
-                    if (end < item.text.length) snippet = snippet + '...';
+                    
+                    if (start > 0) {
+                        snippet = snippet.replace(/^\S+\s/, '');
+                        snippet = '...' + snippet;
+                    }
+                    if (end < item.text.length) {
+                        snippet = snippet.replace(/\s\S+$/, '');
+                        snippet = snippet + '...';
+                    }
 
                     const searchResults = document.createElement('li');
                     searchResults.classList.add('search__item');
@@ -134,7 +209,8 @@ export function initSearch() {
                     
                     const pSnippet = document.createElement('p');
                     pSnippet.classList.add('search__snippet');
-                    pSnippet.textContent = snippet;
+                   
+                    renderHighlighted(pSnippet, snippet, tokens);
                     
                     searchResults.append(p, pSnippet);
                     searchList.append(searchResults);

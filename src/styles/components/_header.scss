@@ -164,7 +164,7 @@
         }
 
         &__list {
-            padding: rem(16);
+            padding-inline: rem(16);
         }
 
         &__item {
@@ -177,11 +177,17 @@
             @include interactive(var(--color-link));
             cursor: pointer;
 
+            mark {
+                font-weight: 800;
+                background-color: var(--color-gray);
+            }
+
         }
 
         &__title {
             font-family: var(--font-family-base);
             font-size: rem(16);
+            font-weight: 600;
         }
 
     }
