@@ -32,3 +32,9 @@
         pointer-events: auto;
     }
 }
+
+.search__highlight {
+    font-weight: 800;
+    color: var(--color-link);
+    background-color: var(--color-gray);
+}

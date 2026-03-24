@@ -9,6 +9,17 @@ export function initSearch() {
     
     if (!mainSource || !searchResult || !searchButton || !overlay || !searchInput || !searchList) return;
 
+    const clearHighlights = () => {
+        document.querySelectorAll('.search__highlight').forEach((el) => {
+            const parent = el.parentNode;
+            if (!parent) return;
+            parent.replaceChild(document.createTextNode(el.textContent), el);
+            parent.normalize();
+        });
+    }
+
+    clearHighlights();
+    
     const normalizeText = function(text) {
         if (text == null) {
             return "";
@@ -68,33 +79,34 @@ export function initSearch() {
     })
 
     const escapeRegExp = (s) => String(s).replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+
     const collectRanges = (text, tokens) => {
-            const ranges = [];
+        const ranges = [];
 
-            for (const token of tokens) {
-                const t = token.trim();
-                if (!t) continue;
+        for (const token of tokens) {
+            const t = token.trim();
+            if (!t) continue;
 
-                const re = new RegExp(escapeRegExp(t), 'giu');
-                let m;
-                while ((m = re.exec(text)) !== null) {
-                    const start = m.index;
-                    const end = start + m[0].length;
-                    if (end > start) ranges.push({ start, end });
-                    if (m[0].length === 0) re.lastIndex++;
-                }
+            const re = new RegExp(escapeRegExp(t), 'giu');
+            let m;
+            while ((m = re.exec(text)) !== null) {
+                const start = m.index;
+                const end = start + m[0].length;
+                if (end > start) ranges.push({ start, end });
+                if (m[0].length === 0) re.lastIndex++;
             }
-
-            ranges.sort((a, b) => a.start - b.start || a.end - b.end);
-
-            const merged = [];
-            for (const r of ranges) {
-                const last = merged[merged.length - 1];
-                if (!last || r.start > last.end) merged.push({ ...r });
-                else last.end = Math.max(last.end, r.end);
-            }
-            return merged;
         }
+
+        ranges.sort((a, b) => a.start - b.start || a.end - b.end);
+        const merged = [];
+        for (const r of ranges) {
+            const last = merged[merged.length - 1];
+            if (!last || r.start > last.end) merged.push({ ...r });
+            else last.end = Math.max(last.end, r.end);
+        }
+
+        return merged;
+    }
 
     const renderHighlighted = (el, text, tokens) => {
             el.textContent = '';
@@ -132,6 +144,8 @@ export function initSearch() {
         const tokens = [...new Set(cleanedMeaningful.split(' ').filter((token) => token.length >= 3))];
         const queryIndex = normalizeForIndex(meaningful);
 
+        if (immediate === false || meaningful !== lastQueryMeaningful) clearHighlights();
+        
         if (meaningful === lastQueryMeaningful && immediate === false) {
             return;
         } else {
@@ -144,6 +158,64 @@ export function initSearch() {
             searchList.innerHTML = '';
             closeSearchResult();
             return;
+        }
+
+        const scrollToMatch = (sectionId, token) => {
+            
+            clearHighlights();
+            
+            const section = document.getElementById(sectionId);
+            if (!section) {
+                location.hash = sectionId;
+                return;
+            }
+            
+            const needle = String(token || '').trim().toLowerCase();
+            if (!needle) {
+                section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                return;
+            }
+
+            const walker = document.createTreeWalker(
+                section, 
+                NodeFilter.SHOW_TEXT, 
+                {
+                    acceptNode(node) {
+                        return node.nodeValue && node.nodeValue.trim()
+                        ? NodeFilter.FILTER_ACCEPT
+                        : NodeFilter.FILTER_REJECT;
+                }
+            });
+
+            let textNode;
+            while ((textNode = walker.nextNode())) {
+                const hay = textNode.nodeValue.toLowerCase();
+                const idx = hay.indexOf(needle);
+                if (idx === -1) continue;
+
+                let matchNode = textNode.splitText(idx);
+                let afterNode = matchNode.splitText(needle.length);
+
+                const parent = afterNode.parentNode;
+                const highlight = document.createElement('span');
+
+                highlight.className = 'search__highlight';
+                highlight.appendChild(matchNode);
+                parent.insertBefore(highlight, afterNode);
+
+                const rect = highlight.getBoundingClientRect();
+                const header = document.querySelector('.header');
+                const headerOffset = header ? header.getBoundingClientRect().height : 0;
+
+                window.scrollTo({
+                    top: window.scrollY + rect.top - headerOffset - 26,
+                    behavior: 'smooth',
+                });
+
+                return;
+            }
+
+            section.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
 
         const searchRender = (queryIndex, { showMessages, openPanel }) => {
@@ -187,8 +259,8 @@ export function initSearch() {
 
                     if (matchIndex === -1) return;
 
-                    const start = Math.max(0, matchIndex - 60);
-                    const end = Math.min(item.text.length, matchIndex + anchor.length + 90);
+                    const start = Math.max(0, matchIndex - 40);
+                    const end = Math.min(item.text.length, matchIndex + anchor.length + 60);
                     let snippet = item.text.slice(start, end);
                     
                     if (start > 0) {
@@ -202,6 +274,9 @@ export function initSearch() {
 
                     const searchResults = document.createElement('li');
                     searchResults.classList.add('search__item');
+
+                    const a = document.createElement('a');
+                    a.href = '#' + item.id;
                     
                     const p = document.createElement('p');
                     p.classList.add('search__title');
@@ -212,10 +287,15 @@ export function initSearch() {
                    
                     renderHighlighted(pSnippet, snippet, tokens);
                     
-                    searchResults.append(p, pSnippet);
+                    a.append(pSnippet);
+                    searchResults.append(p, a);
                     searchList.append(searchResults);
 
-                    searchResults.addEventListener('click', () => closeSearchResult());
+                    a.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        closeSearchResult();
+                        scrollToMatch(item.id, anchor);
+                    })
 
                 })               
                 
