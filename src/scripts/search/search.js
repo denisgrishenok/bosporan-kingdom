@@ -1,3 +1,8 @@
+let resetSearchImpl = null;
+export const resetSearch = () => {
+    if (typeof resetSearchImpl === 'function') resetSearchImpl();
+}
+
 export function initSearch() {
 
     const mainSource = document.querySelector('main.content');
@@ -69,14 +74,40 @@ export function initSearch() {
         document.body.classList.remove('menu-open');
     }
 
+    let debounceId = null;
+    let lastQueryMeaningful = '';
 
-    overlay.addEventListener('click', () => closeSearchResult());
+    const resetSearchInternal = () => {
+        if (searchInput?.value === '' && !searchResult?.classList.contains('is-active') && !document.querySelector('.search__highlight')) return;
+        if (searchInput) searchInput.value = '';
+        if (searchList) searchList.innerHTML = '';
+        if (searchResult) searchResult.classList.remove('is-active');
+        lastQueryMeaningful = '';
+        if (debounceId !== null) {
+            clearTimeout(debounceId);
+            debounceId = null;
+        }
+
+        clearHighlights();
+    }
+
+    resetSearchImpl = resetSearchInternal;
+
+    overlay.addEventListener('click', () => {
+        closeSearchResult();
+    })
 
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape' && searchResult.classList.contains('is-active')) {
             closeSearchResult();
+            resetSearchInternal();
         }
     })
+
+    document.addEventListener('click', (e) => {
+        if (e.target.closest('.header__search') || e.target.closest('.search__result')) return;
+        if (e.target.closest('.header__link, .intro__link, picture')) resetSearchInternal();
+    }, true )
 
     const escapeRegExp = (s) => String(s).replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 
@@ -132,10 +163,6 @@ export function initSearch() {
             if (cursor < text.length) frag.append(document.createTextNode(text.slice(cursor)));
             el.append(frag);
         }
-    
-    let debounceId = null;
-
-    let lastQueryMeaningful = '';
 
     const searchFilter = (input, { immediate }) => {
         const queryRaw = input;

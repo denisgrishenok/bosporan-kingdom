@@ -1,3 +1,5 @@
+import { resetSearch } from "../search/search.js";
+
 export function initHeaderMenu() {
     
     const buttonMenu = document.querySelector('.header__button');
@@ -90,13 +92,13 @@ export function initHeaderMenu() {
     }
 
     const openMenu = () => {
+        resetSearch();
+        
         dropdownMenu.classList.add('is-open');
         overlay.classList.add('is-active');
         document.body.classList.add('menu-open');
         buttonMenu.setAttribute('aria-expanded', 'true');
         buttonMenu.classList.add('is-open');
-
-
 
         highlightActiveLink();
 
