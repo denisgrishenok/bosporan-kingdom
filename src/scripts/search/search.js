@@ -11,6 +11,7 @@ export function initSearch() {
     const overlay = document.querySelector('.header__overlay');
     const searchInput = document.querySelector('.search__input');
     const searchList = document.querySelector('.search__list'); 
+    const searchClear = document.querySelector('.search__clear');
     
     if (!mainSource || !searchResult || !searchButton || !overlay || !searchInput || !searchList) return;
 
@@ -80,6 +81,7 @@ export function initSearch() {
     const resetSearchInternal = () => {
         if (searchInput?.value === '' && !searchResult?.classList.contains('is-active') && !document.querySelector('.search__highlight')) return;
         if (searchInput) searchInput.value = '';
+        if (searchClear) searchClear.classList.remove('is-active');
         if (searchList) searchList.innerHTML = '';
         if (searchResult) searchResult.classList.remove('is-active');
         lastQueryMeaningful = '';
@@ -95,6 +97,7 @@ export function initSearch() {
 
     overlay.addEventListener('click', () => {
         closeSearchResult();
+        resetSearchInternal();
     })
 
     document.addEventListener('keydown', (e) => {
@@ -108,6 +111,13 @@ export function initSearch() {
         if (e.target.closest('.header__search') || e.target.closest('.search__result')) return;
         if (e.target.closest('.header__link, .intro__link, picture')) resetSearchInternal();
     }, true )
+
+    if (searchClear) {searchClear.addEventListener('click', () => {
+        resetSearchInternal();
+        closeSearchResult();
+        searchInput.focus();
+        })
+    }
 
     const escapeRegExp = (s) => String(s).replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 
@@ -358,6 +368,14 @@ export function initSearch() {
 
 
     searchInput.addEventListener('input', () => {
+        const hasText = () => {
+            if (searchInput.value.trim().length > 0 && searchClear) {
+                searchClear.classList.add('is-active');
+            } else {
+                searchClear.classList.remove('is-active');
+            }
+        }
+        hasText();
         searchFilter(searchInput.value, { immediate: false })
     });
 
