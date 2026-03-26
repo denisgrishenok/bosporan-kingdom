@@ -7,13 +7,13 @@ export function initSearch() {
 
     const mainSource = document.querySelector('main.content');
     const searchResult = document.querySelector('.search__result');
-    const searchButton = document.querySelector('.search__submit');
     const overlay = document.querySelector('.header__overlay');
     const searchInput = document.querySelector('.search__input');
     const searchList = document.querySelector('.search__list'); 
     const searchClear = document.querySelector('.search__clear');
+    const searchSubmit = document.querySelector('.search__submit');
     
-    if (!mainSource || !searchResult || !searchButton || !overlay || !searchInput || !searchList) return;
+    if (!mainSource || !searchResult || !overlay || !searchInput || !searchList) return;
 
     const clearHighlights = () => {
         document.querySelectorAll('.search__highlight').forEach((el) => {
@@ -82,6 +82,7 @@ export function initSearch() {
         if (searchInput?.value === '' && !searchResult?.classList.contains('is-active') && !document.querySelector('.search__highlight')) return;
         if (searchInput) searchInput.value = '';
         if (searchClear) searchClear.classList.remove('is-active');
+        if (searchSubmit) searchSubmit.classList.remove('is-hidden');
         if (searchList) searchList.innerHTML = '';
         if (searchResult) searchResult.classList.remove('is-active');
         lastQueryMeaningful = '';
@@ -362,17 +363,14 @@ export function initSearch() {
         }
     })
 
-    searchButton.addEventListener('click', () => {
-        searchFilter(searchInput.value, { immediate: true });
-    })
-
-
     searchInput.addEventListener('input', () => {
         const hasText = () => {
             if (searchInput.value.trim().length > 0 && searchClear) {
                 searchClear.classList.add('is-active');
+                searchSubmit.classList.add('is-hidden');
             } else {
                 searchClear.classList.remove('is-active');
+                searchSubmit.classList.remove('is-hidden');
             }
         }
         hasText();

@@ -56,7 +56,7 @@
             height: calc(var(--header-height) / 1.8);
 
             @include fluid-space(padding-inline, 8, 16);            
-            @include fluid-space(width, 100, 400);
+            @include fluid-space(width, 100, 300);
 
             &:focus-within {
                 background: var(--color-light);
@@ -80,7 +80,8 @@
 
             @include fluid-space(font-size, 13, 16);
             
-            width: 100%;
+            flex: 1;
+            min-width: 0;
             height: 100%;
 
             appearance: none;
@@ -96,46 +97,43 @@
             
         }
 
-        &__clear {
-            display: flex;
-            align-items: center;
-            visibility: hidden;
-            pointer-events: none;
+        &__icon-slot {
+            position: relative;
+            width: rem(18);
+            height: 100%;
+        }
 
+        &__clear {
+            position: absolute;
+            inset: 0;
+            @include flex-center; 
+            display: none;
+            pointer-events: none;
             border: none;
             background: none;
-
-            width: rem(16);
-            padding: 0;
-            
-            cursor: pointer;
-
+            padding: 0;                 
             color: var(--color-link);
 
             &.is-active {
-                visibility: visible;
-                pointer-events: auto;
+                display: block;
+                // @include fluid-space(width, 12, 18);
+                pointer-events: auto;                
+                cursor: pointer;
             }
         }
 
         &__submit {
-            display: flex;
-            align-items: center;
-            
-            padding: 0;
-            width: rem(18);
-
-            border: none;
-            background: none;
-            
-            cursor: pointer;
-
-            color: var(--color-link);
-
-        }
-
-        &__icon {
+            position: absolute;
+            inset: 0;
             display: block;
+            @include flex-center;
+            @include fluid-space(width, 12, 16);
+            color: var(--color-link);
+            pointer-events: none;
+
+            &.is-hidden {
+                display: none;
+            }
 
         }
 
