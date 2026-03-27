@@ -6,8 +6,9 @@ export function initHeaderMenu() {
     const dropdownMenu = document.querySelector('.header__dropdown');
     const sourceList = document.querySelector('.intro__list');
     const overlay = document.querySelector('.header__overlay');
+    const headerLogo = document.querySelector('.header__link');
 
-    if (!buttonMenu || !dropdownMenu || !sourceList || !overlay) return;
+    if (!buttonMenu || !dropdownMenu || !sourceList || !overlay || !headerLogo) return;
     if (!dropdownMenu.children.length) {
         dropdownMenu.append(sourceList.cloneNode(true));
     
@@ -120,13 +121,15 @@ export function initHeaderMenu() {
         dropdownMenu.classList.contains('is-open') ? closeMenu() : openMenu();
     })
 
-    overlay.addEventListener('click', () => closeMenu());
+    overlay.addEventListener('click', () => closeMenu())
 
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape' && dropdownMenu.classList.contains('is-open')) {
             closeMenu();
         }
     })
+
+    headerLogo.addEventListener('click', () => closeMenu())
 
     dropdownMenu.addEventListener('click', (e) => {
         if (e.target.closest('.intro__link')) {

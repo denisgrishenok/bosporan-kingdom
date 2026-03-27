@@ -85,6 +85,7 @@ export function initSearch() {
         if (searchSubmit) searchSubmit.classList.remove('is-hidden');
         if (searchList) searchList.innerHTML = '';
         if (searchResult) searchResult.classList.remove('is-active');
+        if (overlay) overlay.classList.remove('is-active');
         lastQueryMeaningful = '';
         if (debounceId !== null) {
             clearTimeout(debounceId);
