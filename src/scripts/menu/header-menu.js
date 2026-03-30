@@ -7,8 +7,9 @@ export function initHeaderMenu() {
     const sourceList = document.querySelector('.intro__list');
     const overlay = document.querySelector('.header__overlay');
     const headerLogo = document.querySelector('.header__link');
+    const searchInput = document.querySelector('.search__input');
 
-    if (!buttonMenu || !dropdownMenu || !sourceList || !overlay || !headerLogo) return;
+    if (!buttonMenu || !dropdownMenu || !sourceList || !overlay || !headerLogo || !searchInput) return;
     if (!dropdownMenu.children.length) {
         dropdownMenu.append(sourceList.cloneNode(true));
     
@@ -121,7 +122,10 @@ export function initHeaderMenu() {
         dropdownMenu.classList.contains('is-open') ? closeMenu() : openMenu();
     })
 
-    overlay.addEventListener('click', () => closeMenu())
+    overlay.addEventListener('click', () => {
+        if (dropdownMenu.classList.contains('is-open'))
+        closeMenu();
+    })
 
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape' && dropdownMenu.classList.contains('is-open')) {
@@ -129,12 +133,20 @@ export function initHeaderMenu() {
         }
     })
 
-    headerLogo.addEventListener('click', () => closeMenu())
+    headerLogo.addEventListener('click', () => {
+        if (dropdownMenu.classList.contains('is-open')) 
+        closeMenu();
+    })
 
     dropdownMenu.addEventListener('click', (e) => {
         if (e.target.closest('.intro__link')) {
             closeMenu({returnFocus: false})
         }
+    })
+
+    searchInput.addEventListener('focusin', () => {
+        if (dropdownMenu.classList.contains('is-open'))
+            closeMenu({returnFocus: false})
     })
 
     const getCurrentSectionId = () => {
