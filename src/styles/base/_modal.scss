@@ -1,0 +1,74 @@
+@use '../abstracts/mixins' as *;
+@use '../abstracts/functions' as *;
+
+.modal {
+    display: none;
+
+    &.is-open {
+        position: fixed;
+        inset: 0;
+        z-index: 100;
+        
+        @include flex-center;
+    }
+    
+    &__overlay {
+        position: absolute;
+        inset: 0;
+        background-color: rgba(0, 0, 0, 0.8);
+    }
+
+    &__window {
+        position: relative;
+        z-index: 1;
+        padding: rem(32);
+    }
+
+    &__viewer {
+        position: relative;
+        max-width: 80vw;
+        max-height: 90vh;
+        overflow: hidden;
+        touch-action: none;
+        user-select: none;
+        cursor: grab;
+
+        &.is-dragging {
+            cursor: grabbing;
+        }
+    }
+
+    &__img {
+        display: block;
+        transform-origin: 0 0;
+        will-change: transform;
+        pointer-events: none;
+    }
+
+    &__button {
+        position: absolute;
+        top: 0;
+        right: 0;
+        z-index: 10;
+        padding: 0;
+        border: none;
+        background: transparent;
+        cursor: pointer;
+    }
+
+    &__icon {
+        display: block;
+        width: rem(24);
+        height: rem(24);
+        box-sizing: border-box;
+        border: rem(1) solid var(--color-gray);
+        border-radius: rem(6);
+        stroke: var(--color-gray);
+        stroke-width: 1.5;
+        fill: none;
+    }
+
+    &__icon rect {
+        display: none;
+    }
+}
