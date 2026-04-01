@@ -54,7 +54,11 @@ body {
     background-color: var(--color-light);
     overflow-x: hidden;
 
-        &.menu-open {
+    &.menu-open {
+        overflow: hidden;
+    }
+
+    &.modal-open {
         overflow: hidden;
     }
 }
