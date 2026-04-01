@@ -21,13 +21,13 @@
     &__window {
         position: relative;
         z-index: 1;
-        padding: rem(32);
+        @include fluid-space(padding, 16, 36);
     }
 
     &__viewer {
         position: relative;
-        max-width: 80vw;
-        max-height: 90vh;
+        max-width: 75vw;
+        max-height: 85vh;
         overflow: hidden;
         touch-action: none;
         user-select: none;
@@ -58,8 +58,8 @@
 
     &__icon {
         display: block;
-        width: rem(24);
-        height: rem(24);
+        @include fluid-space(width, 16, 28);
+        height: auto;
         box-sizing: border-box;
         border: rem(1) solid var(--color-gray);
         border-radius: rem(6);
