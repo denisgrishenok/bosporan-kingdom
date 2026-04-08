@@ -40,10 +40,10 @@
         overflow: hidden;
         
         &.has-map {
-            width: auto;
-            height: auto;
+            position: relative;
             cursor: grab;
             user-select: none;
+            touch-action: none;
         }
     }
 
@@ -56,6 +56,10 @@
         pointer-events: auto;
 
         &.is-map {
+            position: absolute;
+            left: 0;
+            top: 0;
+            object-fit: none;
             transform-origin: 0 0;
             will-change: transform;
         }

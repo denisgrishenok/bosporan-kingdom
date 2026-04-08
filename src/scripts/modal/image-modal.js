@@ -7,6 +7,7 @@ export function initImageModal() {
     const modalViewer = document.querySelector('.modal__viewer');
 
     let isMapActive = false;
+    let isMapReady = false;
     let scale = 1;
     let translateX = 0;
     let translateY = 0;
@@ -23,95 +24,169 @@ export function initImageModal() {
         document.body.classList.add('modal-open');
     }
 
-    const closeImageModal = () => {
-        modalImageContainer.classList.remove('is-open');
-        document.body.classList.remove('modal-open');
+    const resetModalState = () => {
         modalImg.classList.remove('is-map');
         modalViewer.classList.remove('has-map');
-        modalImg.removeAttribute('src');
-        modalImg.alt = '';
         isMapActive = false;
+        isMapReady = false;
         scale = 1;
         translateX = 0;
         translateY = 0;
         fitScale = 1;
         modalImg.style.transform = '';
         modalImg.onload = null;
+        modalImg.onerror = null;
+        modalImg.removeAttribute('src');
+        modalImg.alt = '';
+        modalImg.style.width = '';
+        modalImg.style.height = '';
+    }
 
+    const closeImageModal = () => {
+        
+        resetModalState();
+       
+        modalImageContainer.classList.remove('is-open');
+        document.body.classList.remove('modal-open');            
     }
 
     modalPicture.forEach((el) => el.addEventListener('click', (e) => {
         const clickedImg = e.currentTarget instanceof HTMLImageElement ? e.currentTarget : null;
         if (!clickedImg) return;
+
+        resetModalState();
         
         modalImg.src = clickedImg.currentSrc || clickedImg.src;
         modalImg.alt = clickedImg.alt;
-        modalImg.classList.remove('is-map');
-        modalViewer.classList.remove('has-map');
-        isMapActive = false;
-        modalImg.style.transform = '';
 
         openImageModal();
     }))
 
-    modalMap.forEach((el) => el.addEventListener('click', (e) => {
-        const clickedMap = e.currentTarget instanceof HTMLImageElement ? e.currentTarget : null;
-        if (!clickedMap) return;
-
-        let srcToLoad = clickedMap.dataset.full || clickedMap.currentSrc || clickedMap.src;
-        let imgSrc = srcToLoad;
-
-        const modalTransformValue = () => {
-            const rect = modalViewer.getBoundingClientRect();
-            const viewerW = rect.width;
-            const viewerH = rect.height;
-            const naturalW = modalImg.naturalWidth;
-            const naturalH = modalImg.naturalHeight;
-            
-            if (naturalW <= 0 || naturalH <= 0) return;
-
-            fitScale = Math.min(viewerW / naturalW, viewerH / naturalH, 1);
-            scale = fitScale;
-            translateX = (viewerW - naturalW * fitScale) / 2;
-            translateY = (viewerH - naturalH * fitScale) / 2;
-
-            modalImg.style.transform = `translate(${translateX}px, ${translateY}px) scale(${scale})`; 
-        }
-        
-        modalImg.onload = () => {
-            if (imgSrc !== modalImg.src) return;
-            modalTransformValue();            
-        } 
-
-        modalImg.src = imgSrc;
-        if (modalImg.complete === true && modalImg.naturalWidth > 0) modalTransformValue();
-        modalImg.alt = clickedMap.alt;
-        modalImg.classList.add('is-map');
-        modalViewer.classList.add('has-map');
-        isMapActive = true;
-
-        openImageModal();      
-        
-    }))
-
-    const clampScale = (v, min, max) => Math.min(max, Math.max(min, v));
-
-    modalViewer.addEventListener('wheel', (e) => {
-        if (!isMapActive || modalImg.naturalWidth <= 0) return;
-        e.preventDefault();
-
+    const getMetrics = () => {
         const rect = modalViewer.getBoundingClientRect();
         const viewerW = rect.width;
         const viewerH = rect.height;
         const naturalW = modalImg.naturalWidth;
         const naturalH = modalImg.naturalHeight;
-            
-        if (naturalW <= 0 || naturalH <= 0) return;
+        
+        return {rect, viewerW, viewerH, naturalW, naturalH};
+    }
 
-        const cursorX = e.clientX - rect.left;
-        const cursorY = e.clientY - rect.top;
-        const imgX = (cursorX - translateX) / scale;
-        const imgY = (cursorY - translateY) / scale;
+    const modalImgStyle = () => {
+        const m = getMetrics();
+        modalImg.style.width = m.naturalW + 'px';
+        modalImg.style.height = m.naturalH + 'px';
+    }
+
+    const applyTransform = () => {
+            modalImg.style.transform = `translate(${translateX}px, ${translateY}px) scale(${scale})`;
+    }
+
+    const fitMapToViewer = () => {
+        const m = getMetrics();
+
+        if (m.naturalW <= 0 || m.naturalH <= 0) return;
+        
+        fitScale = Math.min(m.viewerW / m.naturalW, m.viewerH / m.naturalH, 1);
+        scale = fitScale;
+        translateX = (m.viewerW - m.naturalW * fitScale) / 2;
+        translateY = (m.viewerH - m.naturalH * fitScale) / 2;
+
+    }
+
+    const clampScale = (v, min, max) => Math.min(max, Math.max(min, v));
+
+    const clampTranslate = () => {
+        const m = getMetrics();
+        const scaledW = m.naturalW * scale;
+        const scaledH = m.naturalH * scale;
+
+        if (scaledW <= m.viewerW) {
+            translateX = (m.viewerW - scaledW) / 2;
+        } else {
+            translateX = clampScale(translateX, m.viewerW - scaledW, 0);
+        }
+
+        if (scaledH <= m.viewerH) {
+            translateY = (m.viewerH - scaledH) / 2;
+        } else {
+            translateY = clampScale(translateY, m.viewerH - scaledH, 0);
+        }
+    }
+
+    const zoomAt = (viewerX, viewerY, newScale) => {       
+        if (!isMapActive || !isMapReady) return;
+        if (modalImg.naturalWidth <= 0 || modalImg.naturalHeight <= 0) return;
+        if (!Number.isFinite(scale) || scale <= 0) return;
+        if (!Number.isFinite(newScale) || newScale <= 0) return;
+
+        const imgX = (viewerX - translateX) / scale;
+        const imgY = (viewerY - translateY) / scale;
+
+        scale = newScale;
+        translateX = viewerX - imgX * scale;
+        translateY = viewerY - imgY * scale;
+
+        clampTranslate();
+        applyTransform();
+    }
+
+    modalMap.forEach((el) => el.addEventListener('click', (e) => {
+        const clickedMap = e.currentTarget instanceof HTMLImageElement ? e.currentTarget : null;
+        if (!clickedMap) return;
+
+        modalImg.style.transform = '';
+
+        let imgSrc = clickedMap.dataset.full || clickedMap.currentSrc || clickedMap.src;
+        let expectedHref = new URL(imgSrc, document.baseURI).href;
+        isMapReady = false;
+
+        const modalTransformValue = () => {           
+
+            fitMapToViewer();
+            applyTransform();
+        }
+        
+        modalImg.onload = () => {
+            if (expectedHref !== modalImg.src) return;
+            
+            isMapReady = true;
+            modalImgStyle();  
+            modalTransformValue();          
+        }
+        
+        modalImg.onerror = () => {
+            if (expectedHref !== modalImg.src) return;
+            
+            closeImageModal();
+        }
+
+        modalImg.src = imgSrc;
+        if (modalImg.complete === true && modalImg.naturalWidth > 0) {
+            
+            isMapReady = true;
+            modalImgStyle();
+            modalTransformValue();
+            
+        } 
+        modalImg.alt = clickedMap.alt;
+        modalImg.classList.add('is-map');
+        modalViewer.classList.add('has-map');
+        isMapActive = true;   
+
+        openImageModal();      
+        
+    }))
+
+    modalViewer.addEventListener('wheel', (e) => {
+        if (!isMapActive || !isMapReady) return;
+        e.preventDefault();
+        const m = getMetrics();
+        
+
+        const cursorX = e.clientX - m.rect.left;
+        const cursorY = e.clientY - m.rect.top;
+        
         const zoomFactor = e.deltaY < 0 ? 1.1 : 0.9;
         const minScale = fitScale;
         const maxScale = fitScale * 6;
@@ -119,31 +194,37 @@ export function initImageModal() {
        
         if (newScale === scale) return;
 
-        let newTranslateX = cursorX - imgX * newScale;
-        let newTranslateY = cursorY - imgY * newScale;
-
-        const scaledW = naturalW * newScale;
-        const scaledH = naturalH * newScale;
-
-        if (scaledW <= viewerW) {
-            newTranslateX = (viewerW - scaledW) / 2;
-        } else {
-            newTranslateX = clampScale(newTranslateX, viewerW - scaledW, 0);
-        }
-
-        if (scaledH <= viewerH) {
-            newTranslateY = (viewerH - scaledH) / 2;
-        } else {
-            newTranslateY = clampScale(newTranslateY, viewerH - scaledH, 0);
-        }
-
-        scale = newScale;
-        translateX = newTranslateX;
-        translateY = newTranslateY;
-
-        modalImg.style.transform = `translate(${translateX}px, ${translateY}px) scale(${scale})`;
+        zoomAt(cursorX, cursorY, newScale);
 
     }, { passive: false })
+        
+    const refitMapView = () => {
+        if (!isMapActive || !isMapReady) return;
+        if (modalImg.naturalWidth <= 0 || modalImg.naturalHeight <= 0) return;
+
+        fitMapToViewer();
+        applyTransform();
+    }
+
+    let resizeDebounceId = null;
+
+    const refitMapViewDebounced = () => {
+        if (resizeDebounceId !== null) clearTimeout(resizeDebounceId);
+
+        resizeDebounceId = setTimeout(() => {
+            resizeDebounceId = null;
+            refitMapView();
+        }, 100)
+    }
+
+    window.addEventListener('resize', refitMapViewDebounced);
+    window.addEventListener('orientationchange', () => {
+        requestAnimationFrame(refitMapViewDebounced);
+    })
+
+    if (window.visualViewport) {
+        window.visualViewport.addEventListener('resize', refitMapViewDebounced);
+    }
 
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape' && modalImageContainer.classList.contains('is-open')) {
