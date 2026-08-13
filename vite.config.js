@@ -1,11 +1,14 @@
 import { defineConfig } from 'vite';
 import path from 'path';
 
+process.env.BROWSER = 'chrome';
+
 export default defineConfig({
     root: '.',
     
     server: {
         open: true,
+        host: '127.0.0.1'
     },
 
     build: {
