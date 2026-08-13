@@ -8,10 +8,10 @@
     min-height: calc(100vh - var(--header-height));
     min-height: calc(100dvh - var(--header-height));
     
-    background-image: url(@assets/images/intro-bg_w.webp);
+    background-image: url(/images/intro-bg_w.webp);
     background-image: image-set(
-        url("@assets/images/intro-bg_a.avif") type("image/avif"),
-        url("@assets/images/intro-bg_w.webp") type("image/webp")
+        url("/images/intro-bg_a.avif") type("image/avif"),
+        url("/images/intro-bg_w.webp") type("image/webp")
     );
     
 
