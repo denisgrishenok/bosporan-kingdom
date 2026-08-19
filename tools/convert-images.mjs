@@ -10,16 +10,47 @@ const publicMaps = './public/maps';
 const PREVIEW_WIDTH = 2000;
 const AVIF_QUALITY_IMAGES = 50;
 const AVIF_QUALITY_MAPS = 70;
+const AVIF_PREVIEW_QUALITY_MAPS = 70;
 const PNG_PREVIEW_QUALITY_MAPS = 70;
 
 
 const imageFiles = fs.readdirSync(originalsImages).filter((name) => name.toLowerCase().endsWith('.png'));
 const mapFiles = fs.readdirSync(originalsMaps).filter((name) => name.toLowerCase().endsWith('.png'));
 
+fs.mkdirSync(publicImages, { recursive: true });
+
 for (const name of imageFiles) {
     const inputPath = path.join(originalsImages, name);
     const baseName = path.parse(name).name;
     const avifOutputPath = path.join(publicImages, baseName + '.avif');
     const pngOutputPath = path.join(publicImages, baseName + '.png');
+
+    if (fs.existsSync(avifOutputPath) && fs.existsSync(pngOutputPath)) {
+        if (fs.statSync(inputPath).mtimeMs <= fs.statSync(avifOutputPath).mtimeMs && fs.statSync(inputPath).mtimeMs <= fs.statSync(pngOutputPath).mtimeMs) {
+            continue;
+        }    
+    } 
     
+    await sharp(inputPath).avif({ quality: AVIF_QUALITY_IMAGES }).toFile(avifOutputPath);
+    fs.copyFileSync(inputPath, pngOutputPath);
+}
+
+fs.mkdirSync(publicMaps, { recursive: true });
+
+for (const name of mapFiles) {
+    const inputPath = path.join(originalsMaps, name);
+    const baseName = path.parse(name).name;
+    const avifOutputPath = path.join(publicMaps, baseName + '-full.avif');
+    const previewAvifOutputPath = path.join(publicMaps, baseName + '.avif');
+    const previewPngOutputPath = path.join(publicMaps, baseName + '.png');
+
+    if (fs.existsSync(avifOutputPath) && fs.existsSync(previewAvifOutputPath) && fs.existsSync(previewPngOutputPath)) {
+        if (fs.statSync(inputPath).mtimeMs <= fs.statSync(avifOutputPath).mtimeMs && fs.statSync(inputPath).mtimeMs <= fs.statSync(previewAvifOutputPath).mtimeMs && fs.statSync(inputPath).mtimeMs <= fs.statSync(previewPngOutputPath).mtimeMs) {
+            continue;
+        }
+    }
+
+    await sharp(inputPath).avif({ quality: AVIF_QUALITY_MAPS }).toFile(avifOutputPath);
+    await sharp(inputPath).resize({ width: PREVIEW_WIDTH, withoutEnlargement: true }).avif({ quality: AVIF_PREVIEW_QUALITY_MAPS }).toFile(previewAvifOutputPath);
+    await sharp(inputPath).resize({ width: PREVIEW_WIDTH, withoutEnlargement: true }).png({ quality: PNG_PREVIEW_QUALITY_MAPS }).toFile(previewPngOutputPath);
 }
