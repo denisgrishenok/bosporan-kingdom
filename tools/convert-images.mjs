@@ -60,7 +60,7 @@ for (const name of mapFiles) {
 
         if (fs.existsSync(avifOutputPath) && fs.existsSync(previewAvifOutputPath) && fs.existsSync(previewPngOutputPath)) {
             if (fs.statSync(inputPath).mtimeMs <= fs.statSync(avifOutputPath).mtimeMs && fs.statSync(inputPath).mtimeMs <= fs.statSync(previewAvifOutputPath).mtimeMs && fs.statSync(inputPath).mtimeMs <= fs.statSync(previewPngOutputPath).mtimeMs) {
-                console.log(name, 'pass');
+                console.log('pass', name);
                 continue;
             }
         }
