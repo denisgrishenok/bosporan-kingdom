@@ -11,7 +11,7 @@ const publicImages = path.join(repoRoot, 'public', 'images');
 const publicMaps = path.join(repoRoot, 'public', 'maps');
 
 const PREVIEW_WIDTH = 2000;
-const AVIF_QUALITY_IMAGES = 50;
+const AVIF_QUALITY_IMAGES = 70;
 const AVIF_QUALITY_MAPS = 70;
 const AVIF_PREVIEW_QUALITY_MAPS = 70;
 const PNG_PREVIEW_QUALITY_MAPS = 70;
