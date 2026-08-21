@@ -16,7 +16,7 @@ const AVIF_QUALITY_MAPS = 70;
 const AVIF_PREVIEW_QUALITY_MAPS = 70;
 const PNG_PREVIEW_QUALITY_MAPS = 70;
 
-const imageFiles = fs.readdirSync(originalsImages).filter((name) => name.toLowerCase().endsWith('.png'));
+const imageFiles = fs.readdirSync(originalsImages).filter((name) => name.toLowerCase().endsWith('.png') || name.toLowerCase().endsWith('.jpg') || name.toLowerCase().endsWith('.jpeg'));
 const mapFiles = fs.readdirSync(originalsMaps).filter((name) => name.toLowerCase().endsWith('.png'));
 
 fs.mkdirSync(publicImages, { recursive: true });
@@ -27,17 +27,22 @@ for (const name of imageFiles) {
         const baseName = path.parse(name).name;
         const avifOutputPath = path.join(publicImages, baseName + '.avif');
         const pngOutputPath = path.join(publicImages, baseName + '.png');
+        const jpgOutputPath = path.join(publicImages, baseName + '.jpg');
+        const reserveCopyPath = inputPath.toLowerCase().endsWith('.png') ? pngOutputPath : jpgOutputPath;
 
-        if (fs.existsSync(avifOutputPath) && fs.existsSync(pngOutputPath)) {
-            if (fs.statSync(inputPath).mtimeMs <= fs.statSync(avifOutputPath).mtimeMs && fs.statSync(inputPath).mtimeMs <= fs.statSync(pngOutputPath).mtimeMs) {
-                console.log(name, 'pass');
+        if (fs.existsSync(avifOutputPath) && fs.existsSync(reserveCopyPath)) {
+            if (fs.statSync(inputPath).mtimeMs <= fs.statSync(avifOutputPath).mtimeMs && fs.statSync(inputPath).mtimeMs <= fs.statSync(reserveCopyPath).mtimeMs) {
+                console.log('pass', name);
                 continue;
             }
         }
 
         await sharp(inputPath).avif({ quality: AVIF_QUALITY_IMAGES }).toFile(avifOutputPath);
-        fs.copyFileSync(inputPath, pngOutputPath);
+        
+        fs.copyFileSync(inputPath, reserveCopyPath);
+
         console.log('ready', name);
+
     } catch (error) {
         console.error('error', name, error.message);
     }
