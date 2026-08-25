@@ -12,6 +12,11 @@ export function initImageModal() {
     let translateX = 0;
     let translateY = 0;
     let fitScale = 1;
+    let isGrabbing = false;
+    let lastClientX = 0;
+    let lastClientY = 0;
+    let activePointers = new Map();
+    let lastPinchDistance = 0;
     
     if (!modalImageContainer || !modalButton || !modalOverlay || !modalViewer) return;
 
@@ -29,6 +34,9 @@ export function initImageModal() {
         modalViewer.classList.remove('has-map');
         isMapActive = false;
         isMapReady = false;
+        isGrabbing = false;
+        activePointers.clear();
+        lastPinchDistance = 0;
         scale = 1;
         translateX = 0;
         translateY = 0;
@@ -196,8 +204,90 @@ export function initImageModal() {
 
         zoomAt(cursorX, cursorY, newScale);
 
-    }, { passive: false })
+    }, { passive: false });
+
+    modalViewer.addEventListener('pointerdown', (e) => {
+        if (!isMapActive || !isMapReady) return;
+        if (e.button !== 0) return;
+        e.preventDefault();
+
+        activePointers.set(e.pointerId, { x: e.clientX, y: e.clientY });
+
+        if (activePointers.size === 2) {
+            isGrabbing = false;
+            const points = [...activePointers.values()];
+            lastPinchDistance = Math.hypot(points[1].x - points[0].x, points[1].y - points[0].y);
+        } else {        
         
+            lastClientX = e.clientX;
+            lastClientY = e.clientY;
+            isGrabbing = true;
+        }
+        
+        modalViewer.setPointerCapture(e.pointerId);
+
+    }, { passive: false });
+
+    modalViewer.addEventListener('pointermove', (e) => {
+        if (!isMapActive || !isMapReady) return;
+        e.preventDefault();
+
+        activePointers.set(e.pointerId, { x: e.clientX, y: e.clientY });
+
+        if (activePointers.size === 2) {
+            const points = [...activePointers.values()];
+            const distance = Math.hypot(points[1].x - points[0].x, points[1].y - points[0].y);
+            if (lastPinchDistance === 0 || !Number.isFinite(distance)) {
+                lastPinchDistance = distance;
+                return;
+            }
+
+            const m = getMetrics();
+            const cursorX = (points[0].x + points[1].x) /2 - m.rect.left;
+            const cursorY = (points[0].y + points[1].y) /2 - m.rect.top;
+            const newScale = clampScale(scale * (distance / lastPinchDistance), fitScale, fitScale * 6);
+
+            zoomAt(cursorX, cursorY, newScale);
+
+            lastPinchDistance = distance;
+
+        } else if (isGrabbing) {
+            const moveX = e.clientX - lastClientX;
+            const moveY = e.clientY - lastClientY;
+            translateX = translateX + moveX;
+            translateY = translateY + moveY;
+
+            clampTranslate();
+            applyTransform();
+
+            lastClientX = e.clientX;
+            lastClientY = e.clientY;
+        }   
+
+    }, { passive: false });
+
+    const endGrabbing = (e) => {
+        if (!isMapActive || !isMapReady) return;
+        e.preventDefault();
+
+        activePointers.delete(e.pointerId);
+        modalViewer.releasePointerCapture(e.pointerId);
+        
+        if (activePointers.size === 0) {
+            isGrabbing = false;
+        } else if (activePointers.size === 1) {
+            const points = [...activePointers.values()];
+            lastClientX = points[0].x;
+            lastClientY = points[0].y;
+            isGrabbing = true;
+        }
+        
+    }
+
+    modalViewer.addEventListener('pointerup', endGrabbing, { passive: false });
+
+    modalViewer.addEventListener('pointercancel', endGrabbing, { passive: false });
+    
     const refitMapView = () => {
         if (!isMapActive || !isMapReady) return;
         if (modalImg.naturalWidth <= 0 || modalImg.naturalHeight <= 0) return;
