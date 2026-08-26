@@ -44,6 +44,8 @@
             cursor: grab;
             user-select: none;
             touch-action: none;
+            width: calc(100vw - var(--container-padding-x) * 2);
+            height: calc(100vh - var(--container-padding-x) * 2);
         }
     }
 
