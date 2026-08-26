@@ -2,7 +2,9 @@ export function initImageModal() {
     const modalPicture = document.querySelectorAll('.picture--img, .small-picture--img, .wide-picture--img');
     const modalMap = document.querySelectorAll('.map--img');
     const modalImageContainer = document.querySelector('.modal');
-    const modalButton = document.querySelector('.modal__button');
+    const modalButton = document.querySelector('.modal__button:not(.zoom)');
+    const modalButtonMinus = document.querySelector('.modal__button.zoom[aria-label="Уменьшить масштаб"]'); 
+    const modalButtonPlus = document.querySelector('.modal__button.zoom[aria-label="Увеличить масштаб"]');
     const modalOverlay = document.querySelector('.modal__overlay');
     const modalViewer = document.querySelector('.modal__viewer');
 
@@ -18,7 +20,7 @@ export function initImageModal() {
     let activePointers = new Map();
     let lastPinchDistance = 0;
     
-    if (!modalImageContainer || !modalButton || !modalOverlay || !modalViewer) return;
+    if (!modalImageContainer || !modalButton || !modalButtonMinus || !modalButtonPlus || !modalOverlay || !modalViewer) return;
 
     const modalImg = modalImageContainer.querySelector('.modal__img');
 
@@ -137,6 +139,18 @@ export function initImageModal() {
 
         clampTranslate();
         applyTransform();
+    }
+
+    const zoomAtButtons = (zoomFactor) => {
+        if (!isMapActive || !isMapReady) return;
+
+        const m = getMetrics();
+        const newScale = clampScale(scale * zoomFactor, fitScale, fitScale * 6);
+        
+        if (newScale === scale) return;
+
+        zoomAt(m.viewerW / 2, m.viewerH / 2, newScale);
+
     }
 
     modalMap.forEach((el) => el.addEventListener('click', (e) => {
@@ -323,5 +337,7 @@ export function initImageModal() {
     })
 
     modalButton.addEventListener('click', () => closeImageModal());
+    modalButtonMinus.addEventListener('click', () => zoomAtButtons(0.9));
+    modalButtonPlus.addEventListener('click', () => zoomAtButtons(1.1));
     modalOverlay.addEventListener('click', () => closeImageModal());
 }

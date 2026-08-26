@@ -49,6 +49,10 @@
         }
     }
 
+    &__viewer.has-map ~ &__controls .zoom {
+        display: block;
+    }
+
     &__img {
         display: block;
         width: 100%;
@@ -67,16 +71,27 @@
         }
     }
 
-    &__button {
+    &__controls {
         position: absolute;
+        display: flex;
+        gap: rem(20);
         top: 2%;
         right: 2%;
         z-index: 10;
+        
+    }
+
+    &__button {      
         padding: 0;
         border: none;
         border-radius: var(--border-radius);
         background: rgba(0, 0, 0, 0.8);
         cursor: pointer;
+
+        &.zoom {
+            display: none;
+        }
+
     }
 
     &__icon {
@@ -95,4 +110,6 @@
     &__icon rect {
         display: none;
     }
+
+
 }
