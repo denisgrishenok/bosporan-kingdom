@@ -64,10 +64,21 @@
     display: flex;
 }
 
+.picture--open {
+    border: none;
+    padding: 0;
+    background: none;
+
+    cursor: pointer;
+
+    &:focus-visible {
+        outline: rem(1) solid var(--color-link-hover);
+    }
+}
+
 .picture--img {
     @include fluid-space(width, 176, 240);
     height: auto;
-    cursor: pointer;
 }
 
 .small-picture--img {

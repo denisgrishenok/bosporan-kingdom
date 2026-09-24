@@ -1,5 +1,6 @@
 export function initImageModal() {
     const modalPicture = document.querySelectorAll('.picture--img, .small-picture--img, .wide-picture--img');
+    const modalPictureOpen = document.querySelectorAll('.picture--open'); 
     const modalMap = document.querySelectorAll('.map--img');
     const modalImageContainer = document.querySelector('.modal');
     const modalButton = document.querySelector('.modal__button:not(.zoom)');
@@ -60,16 +61,31 @@ export function initImageModal() {
         document.body.classList.remove('modal-open');            
     }
 
-    modalPicture.forEach((el) => el.addEventListener('click', (e) => {
-        const clickedImg = e.currentTarget instanceof HTMLImageElement ? e.currentTarget : null;
-        if (!clickedImg) return;
+    const openImage = (innerImg) => {
+        innerImg = innerImg instanceof HTMLImageElement ? innerImg : null;
+        if(!innerImg) return;
 
         resetModalState();
-        
-        modalImg.src = clickedImg.currentSrc || clickedImg.src;
-        modalImg.alt = clickedImg.alt;
+
+        modalImg.src = innerImg.currentSrc || innerImg.src;
+        modalImg.alt = innerImg.alt;
 
         openImageModal();
+    }
+
+    modalPicture.forEach((el) => el.addEventListener('click', (e) => {
+        const clickedImg = e.currentTarget;
+
+        if (clickedImg.closest('.picture--open')) return;
+        
+        openImage(clickedImg);
+        
+    }))
+
+    modalPictureOpen.forEach((el) => el.addEventListener('click', (e) => {
+        const clickedImg = e.currentTarget.querySelector('img');
+        
+        openImage(clickedImg);
     }))
 
     const getMetrics = () => {
