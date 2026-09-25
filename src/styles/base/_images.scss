@@ -77,18 +77,18 @@
 }
 
 .picture--img {
-    @include fluid-space(width, 176, 240);
+    @include fluid-space(width, 200, 240);
     height: auto;
 }
 
 .small-picture--img {
-    @include fluid-space(width, 112, 144);
+    @include fluid-space(width, 126, 144);
     height: auto;
     cursor: pointer;
 }
 
 .wide-picture--img {
-    @include fluid-space(width, 288, 720);
+    @include fluid-space(width, 325, 720);
     height: auto;
     cursor: pointer;
 }
