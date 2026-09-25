@@ -20,6 +20,10 @@
 
     &__window {
         z-index: 1;
+
+        &:focus {
+            outline: none;
+        }
     }
 
     &__viewer {

@@ -8,7 +8,9 @@ export function initImageModal() {
     const modalButtonPlus = document.querySelector('.modal__button.zoom[aria-label="Увеличить масштаб"]');
     const modalOverlay = document.querySelector('.modal__overlay');
     const modalViewer = document.querySelector('.modal__viewer');
+    const modalWindow = document.querySelector('.modal__window');
 
+    let currentActiveElement = null;
     let isMapActive = false;
     let isMapReady = false;
     let scale = 1;
@@ -21,15 +23,18 @@ export function initImageModal() {
     let activePointers = new Map();
     let lastPinchDistance = 0;
     
-    if (!modalImageContainer || !modalButton || !modalButtonMinus || !modalButtonPlus || !modalOverlay || !modalViewer) return;
+    if (!modalImageContainer || !modalButton || !modalButtonMinus || !modalButtonPlus || !modalOverlay || !modalViewer || !modalWindow) return;
 
     const modalImg = modalImageContainer.querySelector('.modal__img');
 
     if (!modalImg) return;
 
     const openImageModal = () => {
+        currentActiveElement = document.activeElement;
+
         modalImageContainer.classList.add('is-open');
         document.body.classList.add('modal-open');
+        modalWindow.focus({ preventScroll: true });
     }
 
     const resetModalState = () => {
@@ -58,7 +63,10 @@ export function initImageModal() {
         resetModalState();
        
         modalImageContainer.classList.remove('is-open');
-        document.body.classList.remove('modal-open');            
+        document.body.classList.remove('modal-open');  
+        
+        if(currentActiveElement) currentActiveElement.focus({ preventScroll: true });
+        currentActiveElement = null;
     }
 
     const openImage = (innerImg) => {
@@ -349,6 +357,30 @@ export function initImageModal() {
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape' && modalImageContainer.classList.contains('is-open')) {
             closeImageModal();
+        }
+
+        if (e.key === 'Tab' && modalImageContainer.classList.contains('is-open')) {
+            let buttons = new Array(modalButtonMinus, modalButtonPlus, modalButton);
+            buttons = buttons.filter((i) => getComputedStyle(i).display !== 'none');
+
+            if(buttons.length === 0) {
+                e.preventDefault();
+                return;
+            } 
+            
+            let first = buttons[0];
+            let last = buttons[buttons.length -1];
+            let current = document.activeElement;
+
+            if (!e.shiftKey && current === last) {
+                e.preventDefault();
+                first.focus({ preventScroll: true });
+            }
+            
+            if (e.shiftKey && (current === first || current === modalWindow)) {
+                e.preventDefault();
+                last.focus({ preventScroll: true });
+            }
         }
     })
 
