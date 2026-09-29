@@ -1,5 +1,4 @@
 export function initImageModal() {
-    const modalPicture = document.querySelectorAll('.picture--img, .small-picture--img, .wide-picture--img');
     const modalPictureOpen = document.querySelectorAll('.picture--open'); 
     const modalMap = document.querySelectorAll('.map--img');
     const modalImageContainer = document.querySelector('.modal');
@@ -80,15 +79,6 @@ export function initImageModal() {
 
         openImageModal();
     }
-
-    modalPicture.forEach((el) => el.addEventListener('click', (e) => {
-        const clickedImg = e.currentTarget;
-
-        if (clickedImg.closest('.picture--open')) return;
-        
-        openImage(clickedImg);
-        
-    }))
 
     modalPictureOpen.forEach((el) => el.addEventListener('click', (e) => {
         const clickedImg = e.currentTarget.querySelector('img');
