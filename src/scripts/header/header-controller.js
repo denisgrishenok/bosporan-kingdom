@@ -14,6 +14,8 @@ export function initSmartHeader() {
     const SHOW_THRESHOLD = 1500; 
     
     function showHeader() {
+        if (document.body.classList.contains('modal-open')) return;
+
         header.classList.remove('is-hidden');
     }
 
@@ -79,7 +81,7 @@ export function initSmartHeader() {
         lastScroll = currentScroll;
     }
 
-    function handleMouseMove(e) {
+    function handleMouseMove(e) {        
         if (e.clientY <= TOP_HOVER_ZONE) {
             showHeader();
         }
