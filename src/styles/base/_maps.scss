@@ -15,8 +15,21 @@
    
 }
 
+.map--open {
+    display: block;
+    border: none;
+    padding: 0;
+    background: none;
+    
+    cursor: pointer;
+
+    &:focus-visible {
+        outline: rem(1) solid var(--color-link-hover);
+    }
+}
+
 .map--img {
     @include fluid-space(width, 290, 1168);
     height: auto;
-    cursor: pointer;
+    
 }

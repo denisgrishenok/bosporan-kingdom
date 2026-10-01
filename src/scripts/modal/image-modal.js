@@ -1,6 +1,6 @@
 export function initImageModal() {
     const modalPictureOpen = document.querySelectorAll('.picture--open'); 
-    const modalMap = document.querySelectorAll('.map--img');
+    const modalMap = document.querySelectorAll('.map--open');
     const modalImageContainer = document.querySelector('.modal');
     const modalButton = document.querySelector('.modal__button:not(.zoom)');
     const modalButtonMinus = document.querySelector('.modal__button.zoom[aria-label="Уменьшить масштаб"]'); 
@@ -168,7 +168,7 @@ export function initImageModal() {
     }
 
     modalMap.forEach((el) => el.addEventListener('click', (e) => {
-        const clickedMap = e.currentTarget instanceof HTMLImageElement ? e.currentTarget : null;
+        const clickedMap = e.currentTarget.querySelector('img');
         if (!clickedMap) return;
 
         modalImg.style.transform = '';
