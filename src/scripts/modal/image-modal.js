@@ -8,7 +8,7 @@ export function initImageModal() {
     const modalOverlay = document.querySelector('.modal__overlay');
     const modalViewer = document.querySelector('.modal__viewer');
     const modalWindow = document.querySelector('.modal__window');
-
+    
     let currentActiveElement = null;
     let isMapActive = false;
     let isMapReady = false;
@@ -39,6 +39,7 @@ export function initImageModal() {
     const resetModalState = () => {
         modalImg.classList.remove('is-map');
         modalViewer.classList.remove('has-map');
+        modalViewer.classList.remove('is-grabbing');
         isMapActive = false;
         isMapReady = false;
         isGrabbing = false;
@@ -243,6 +244,7 @@ export function initImageModal() {
 
         if (activePointers.size === 2) {
             isGrabbing = false;
+            modalViewer.classList.remove('is-grabbing');
             const points = [...activePointers.values()];
             lastPinchDistance = Math.hypot(points[1].x - points[0].x, points[1].y - points[0].y);
         } else {        
@@ -250,10 +252,11 @@ export function initImageModal() {
             lastClientX = e.clientX;
             lastClientY = e.clientY;
             isGrabbing = true;
+            modalViewer.classList.add('is-grabbing');
         }
         
         modalViewer.setPointerCapture(e.pointerId);
-
+        
     }, { passive: false });
 
     modalViewer.addEventListener('pointermove', (e) => {
@@ -303,11 +306,13 @@ export function initImageModal() {
         
         if (activePointers.size === 0) {
             isGrabbing = false;
+            modalViewer.classList.remove('is-grabbing');
         } else if (activePointers.size === 1) {
             const points = [...activePointers.values()];
             lastClientX = points[0].x;
             lastClientY = points[0].y;
             isGrabbing = true;
+            modalViewer.classList.add('is-grabbing');
         }
         
     }

@@ -51,6 +51,10 @@
             width: calc(100vw - var(--container-padding-x) * 2);
             height: calc(100vh - var(--container-padding-x) * 2);
         }
+
+        &.is-grabbing {
+            cursor: grabbing;
+        }
     }
 
     &__viewer.has-map ~ &__controls .zoom {
