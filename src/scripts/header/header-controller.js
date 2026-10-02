@@ -10,8 +10,8 @@ export function initSmartHeader() {
 
     const TOP_OFFSET = 30;
     const TOP_HOVER_ZONE = 30;
-    const HIDE_THRESHOLD = 1000;
-    const SHOW_THRESHOLD = 1500; 
+    const HIDE_THRESHOLD = 300;
+    const SHOW_THRESHOLD = 250; 
     
     function showHeader() {
         if (document.body.classList.contains('modal-open')) return;
