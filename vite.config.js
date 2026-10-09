@@ -40,14 +40,33 @@ export default defineConfig({
             order: 'pre',
             handler(html) {
                 
-                return html.replace(/<!-- include:(.+?) -->/g, (match, file) => {
+                const htmlReplace = html.replace(/<!-- include:(.+?) -->/g, (match, file) => {
                     const filePath = path.resolve(__dirname, file.trim());
 
                     if (!fs.existsSync(filePath)) throw new Error(`HTML include not found: ${filePath}`);
                     return fs.readFileSync(filePath, 'utf8'); 
-            });
+                });
+
+                return htmlReplace.replace(/<!-- photo:(.+?) -->/g, (match, id) => {
+                    const mediaPath = path.resolve(__dirname, 'src/content/media.json');
+                    const media = JSON.parse(fs.readFileSync(mediaPath, 'utf8'));
+                    const record = media[id.trim()];
+
+                    if (!record) throw new Error(`Media not found: "${id}"`);
+
+                    const templatePath = path.resolve(__dirname, 'src/templates/photo.html');
+                    const template = fs.readFileSync(templatePath, "utf8");
+
+                    return template.replace(/\{\{(\w+)\}\}/g, (placeholder, key) => {
+                        if (record[key] === undefined) {
+                            throw new Error(`Field "${key}" missing in media "${id}"`);
+                        } 
+                        return record[key];
+                    });
+                });
+            }
         }
-    }}]
+    }]
         
 
 })
