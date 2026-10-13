@@ -4,6 +4,22 @@ import fs from 'fs';
 
 process.env.BROWSER = 'chrome';
 
+function renderPhoto(image) {
+    const templatePath = path.resolve(__dirname, 'src/templates/photo.html');
+    const template = fs.readFileSync(templatePath, 'utf8');
+
+    return template.replace(/\{\{(\w+)\}\}/g, (placeholder, key) => {
+        if (image[key] === undefined) {
+            throw new Error(`Field "${key}" missing in image "${image.src}"`);
+        } 
+        return image[key];
+    });
+}
+
+function renderParagraph(lines) {
+    return `<p>${lines.join('<br>')}</p>`; 
+}
+
 export default defineConfig({
     root: '.',
     
@@ -47,21 +63,35 @@ export default defineConfig({
                     return fs.readFileSync(filePath, 'utf8'); 
                 });
 
-                return htmlReplace.replace(/<!-- photo:(.+?) -->/g, (match, id) => {
+                return htmlReplace.replace(/<!-- card:(.+?) -->/g, (match, id) => {
                     const mediaPath = path.resolve(__dirname, 'src/content/media.json');
                     const media = JSON.parse(fs.readFileSync(mediaPath, 'utf8'));
-                    const record = media[id.trim()];
+                    const card = media[id.trim()];
 
-                    if (!record) throw new Error(`Media not found: "${id}"`);
+                    if (!card) throw new Error(`Media not found: "${id}"`);
 
-                    const templatePath = path.resolve(__dirname, 'src/templates/photo.html');
-                    const template = fs.readFileSync(templatePath, "utf8");
-
+                    let imagesHTML = card.images.map((image) => renderPhoto(image)).join('');
+                    if (card.images.length > 1) {
+                        imagesHTML = `<div class="double-picture--container">${imagesHTML}</div>`;
+                    }
+                    
+                    const captionHTML = renderParagraph(card.caption);
+                    const textHTML = card.text.map((paragraph) => renderParagraph(paragraph)).join('');
+                    
+                    const templatePath = path.resolve(__dirname, 'src/templates/card.html');
+                    const template = fs.readFileSync(templatePath, 'utf8');
+                    const cardParts = {
+                        images: imagesHTML,
+                        caption: captionHTML,
+                        text: textHTML 
+                    };
+                    
                     return template.replace(/\{\{(\w+)\}\}/g, (placeholder, key) => {
-                        if (record[key] === undefined) {
-                            throw new Error(`Field "${key}" missing in media "${id}"`);
+                        if (cardParts[key] === undefined) {
+                            throw new Error(`Field "${key}" missing in card "${id}"`);
                         } 
-                        return record[key];
+                        
+                        return cardParts[key];
                     });
                 });
             }
