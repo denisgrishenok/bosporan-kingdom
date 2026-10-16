@@ -4,16 +4,17 @@ import fs from 'fs';
 
 process.env.BROWSER = 'chrome';
 
-function renderPhoto(image) {
-    const templatePath = path.resolve(__dirname, 'src/templates/photo.html');
-    const template = fs.readFileSync(templatePath, 'utf8');
-
+function fillTemplate(template, data, source) {
     return template.replace(/\{\{(\w+)\}\}/g, (placeholder, key) => {
-        if (image[key] === undefined) {
-            throw new Error(`Field "${key}" missing in image "${image.src}"`);
-        } 
-        return image[key];
+        if (data[key] === undefined) {
+            throw new Error(`Field "${key}" missing in "${source}"`);
+        }
+        return data[key];
     });
+}
+
+function renderPhoto(image, template) {
+    return fillTemplate(template, image, `image ${image.src}`);
 }
 
 function renderParagraph(lines) {
@@ -58,19 +59,25 @@ export default defineConfig({
                 
                 const htmlReplace = html.replace(/<!-- include:(.+?) -->/g, (match, file) => {
                     const filePath = path.resolve(__dirname, file.trim());
-
+                    
                     if (!fs.existsSync(filePath)) throw new Error(`HTML include not found: ${filePath}`);
                     return fs.readFileSync(filePath, 'utf8'); 
                 });
 
+                const mediaPath = path.resolve(__dirname, 'src/content/media.json');
+                const media = JSON.parse(fs.readFileSync(mediaPath, 'utf8'));
+                const photoTemplatePath = path.resolve(__dirname, 'src/templates/photo.html');
+                const photoTemplate = fs.readFileSync(photoTemplatePath, 'utf8');
+                const cardTemplatePath = path.resolve(__dirname, 'src/templates/card.html');
+                const cardTemplate = fs.readFileSync(cardTemplatePath, 'utf8');
+
                 return htmlReplace.replace(/<!-- card:(.+?) -->/g, (match, id) => {
-                    const mediaPath = path.resolve(__dirname, 'src/content/media.json');
-                    const media = JSON.parse(fs.readFileSync(mediaPath, 'utf8'));
+                    
                     const card = media[id.trim()];
 
                     if (!card) throw new Error(`Media not found: "${id}"`);
 
-                    let imagesHTML = card.images.map((image) => renderPhoto(image)).join('');
+                    let imagesHTML = card.images.map((image) => renderPhoto(image, photoTemplate)).join('');
                     if (card.images.length > 1) {
                         imagesHTML = `<div class="double-picture--container">${imagesHTML}</div>`;
                     }
@@ -78,21 +85,14 @@ export default defineConfig({
                     const captionHTML = renderParagraph(card.caption);
                     const textHTML = card.text.map((paragraph) => renderParagraph(paragraph)).join('');
                     
-                    const templatePath = path.resolve(__dirname, 'src/templates/card.html');
-                    const template = fs.readFileSync(templatePath, 'utf8');
                     const cardParts = {
                         images: imagesHTML,
                         caption: captionHTML,
                         text: textHTML 
                     };
                     
-                    return template.replace(/\{\{(\w+)\}\}/g, (placeholder, key) => {
-                        if (cardParts[key] === undefined) {
-                            throw new Error(`Field "${key}" missing in card "${id}"`);
-                        } 
-                        
-                        return cardParts[key];
-                    });
+                    return fillTemplate(cardTemplate, cardParts, `card ${id.trim()}`);
+                    
                 });
             }
         }
